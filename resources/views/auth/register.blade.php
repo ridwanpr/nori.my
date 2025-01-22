@@ -7,7 +7,7 @@
                     <div class="card sticky-top bg-body-tertiary bg-opacity-75">
                         <div class="card-body">
                             <h4 class="card-title text-center">Register</h4>
-                            <form action="" method="post">
+                            <form action="{{ route('register.post') }}" method="post">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>

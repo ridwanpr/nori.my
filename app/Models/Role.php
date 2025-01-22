@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Role extends Model
 {
+    public const ADMIN = 1;
+    public const USER = 2;
+
     protected $table = 'roles';
     protected $fillable = [
         'name',
@@ -19,3 +22,4 @@ class Role extends Model
         return $this->hasMany(User::class);
     }
 }
+
