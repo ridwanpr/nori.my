@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Frontend\BookmarkController;
@@ -17,4 +18,12 @@ Route::get('register', [AuthController::class, 'getRegisterPage'])->name('regist
 Route::post('register', [AuthController::class, 'postRegister'])->name('register.post');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('bookmark', [BookmarkController::class, 'index'])->name('bookmark.index');
+Route::group(['middleware' => ['auth', 'checkRoles:admin']], function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+});
+
+Route::group(['middleware' => ['auth', 'checkRoles:user']], function () {
+    Route::get('bookmark', [BookmarkController::class, 'index'])->name('bookmark.index');
+});
+
+

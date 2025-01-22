@@ -37,9 +37,15 @@
                     </a>
                 @endguest
                 @auth
-                    <a href="{{ route('bookmark.index') }}" class="btn btn-auth btn-primary text-white">
-                        <i class="bi bi-bookmark-heart"></i> Bookmark
-                    </a>
+                    @if(auth()->user()->hasRole('user'))
+                        <a href="{{ route('bookmark.index') }}" class="btn btn-auth btn-primary text-white">
+                            <i class="bi bi-bookmark-heart"></i> Bookmark
+                        </a>
+                    @elseif (auth()->user()->hasRole('admin'))
+                        <a href="{{ route('dashboard.index') }}" class="btn btn-auth btn-primary text-white">
+                            <i class="bi bi-bookmark-heart"></i> Dashboard
+                        </a>
+                    @endif
                 @endauth
             </div>
             <button class="btn theme-toggle ms-3" onclick="toggleTheme()">
