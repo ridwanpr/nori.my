@@ -19,7 +19,7 @@
                                 <div class="d-grid gap-2">
                                     <button type="submit" class="btn btn-primary">Login</button>
                                 </div>
-                                <p class="text-center mt-3">Don't have an account? <a href="#">Register</a></p>
+                                <p class="text-center mt-3">Don't have an account? <a href="{{ route('register') }}">Register</a></p>
                             </form>
                         </div>
                     </div>
