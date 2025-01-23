@@ -7,13 +7,20 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li class="nav-item px-2">
-                    <a class="nav-link active" href="{{ route('home') }}">Home</a>
+                    <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
+                        <i class="bi bi-house me-2"></i>Home
+                    </a>
                 </li>
                 <li class="nav-item px-2">
-                    <a class="nav-link" href="/anime-list">Anime List</a>
+                    <a class="nav-link {{ request()->routeIs('anime.index') ? 'active' : '' }}"
+                        href="{{ route('anime.index') }}">
+                        <i class="bi bi-collection-play me-2"></i>Browse Anime
+                    </a>
                 </li>
                 <li class="nav-item px-2">
-                    <a class="nav-link" href="/anime-detail">Anime Detail</a>
+                    <a class="nav-link" href="">
+                        <i class="bi bi-tags me-2"></i>Genres
+                    </a>
                 </li>
                 <li class="nav-item px-2">
                     <a class="nav-link" href="/anime-watch">Anime Watch</a>
@@ -37,11 +44,11 @@
                     </a>
                 @endguest
                 @auth
-                    @if(auth()->user()->hasRole('user'))
+                    @if (auth()->user()->role_id == 2)
                         <a href="{{ route('bookmark.index') }}" class="btn btn-auth btn-primary text-white">
                             <i class="bi bi-bookmark-heart"></i> Bookmark
                         </a>
-                    @elseif (auth()->user()->hasRole('admin'))
+                    @elseif (auth()->user()->role_id == 1)
                         <a href="{{ route('dashboard.index') }}" class="btn btn-auth btn-primary text-white">
                             <i class="bi bi-bookmark-heart"></i> Dashboard
                         </a>

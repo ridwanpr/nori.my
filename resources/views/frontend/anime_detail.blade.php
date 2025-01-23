@@ -6,31 +6,32 @@
         <div class="container position-relative py-5">
             <div class="row align-items-end">
                 <div class="col-md-3 mb-4 mb-md-0">
-                    <img src="https://via.placeholder.com/300x450" class="anime-cover rounded-3 w-100" alt="One Piece">
+                    <img src="{{ asset('storage/' . $anime->image) }}" class="anime-cover rounded-3 w-100"
+                        alt="{{ $anime->title }}">
                 </div>
                 <div class="col-md-9">
-                    <h1 class="text-white mb-3">One Piece</h1>
+                    <h1 class="text-white mb-3">{{ $anime->title }}</h1>
                     <div class="d-flex align-items-center gap-3 mb-3">
                         <div class="rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star"></i>
-                            <span class="ms-1 text-white">4.0</span>
+                            @for ($i = 0; $i < 5; $i++)
+                                @if ($i < floor($anime->rating))
+                                    <i class="bi bi-star-fill"></i>
+                                @else
+                                    <i class="bi bi-star"></i>
+                                @endif
+                            @endfor
+                            <span class="ms-1 text-white">{{ $anime->rating }}</span>
                         </div>
-                        <span class="badge bg-success">Ongoing</span>
-                        <span class="text-white">Episodes: 1000+</span>
+                        <span class="badge bg-success">{{ $anime->status }}</span>
+                        <span class="text-white">Episodes: {{ $anime->episodes }}</span>
                     </div>
                     <div class="mb-4">
-                        <span class="genre-tag">Adventure</span>
-                        <span class="genre-tag">Action</span>
-                        <span class="genre-tag">Fantasy</span>
+                        @foreach ($anime->genres as $genre)
+                            <span class="genre-tag">{{ $genre->name }}</span>
+                        @endforeach
                     </div>
-                    <p class="text-white mb-4">Monkey D. Luffy wants to become the King of all pirates. Along his quest
-                        he meets many different people, making friends and enemies along the way. Will he be able to gather
-                        the strongest crew and find the legendary One Piece?</p>
-                    <a href="watch.html" class="btn btn-watch">
+                    <p class="text-white mb-4">{{ $anime->synopsis }}</p>
+                    <a href="" class="btn btn-watch">
                         <i class="bi bi-play-fill me-2"></i>Watch Episode 1
                     </a>
                 </div>
@@ -55,17 +56,12 @@
                     </div>
                 </div>
                 <div class="episode-grid">
-                    <a href="watch.html" class="episode-card active">1</a>
-                    <a href="watch.html" class="episode-card">2</a>
-                    <a href="watch.html" class="episode-card">3</a>
-                    <a href="watch.html" class="episode-card">4</a>
-                    <a href="watch.html" class="episode-card">5</a>
-                    <a href="watch.html" class="episode-card">6</a>
-                    <a href="watch.html" class="episode-card">7</a>
-                    <a href="watch.html" class="episode-card">8</a>
-                    <a href="watch.html" class="episode-card">9</a>
-                    <a href="watch.html" class="episode-card">10</a>
-                    <!-- More episodes -->
+                    <a href="#" class="episode-card active">1</a>
+                    <a href="#" class="episode-card">2</a>
+                    <a href="#" class="episode-card">3</a>
+                    <a href="#" class="episode-card">4</a>
+                    <a href="#" class="episode-card">5</a>
+                    <a href="#" class="episode-card">6</a>
                 </div>
             </div>
             <div class="col-lg-4">

@@ -1,9 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <section class="mb-5">
-        <h2 class="mb-4">Trending Now</h2>
+        <h2 class="mb-4">Trending</h2>
         <div class="trending-scroll d-flex gap-3">
-            <!-- Trending Anime Cards -->
             <div class="card anime-card" style="min-width: 250px;">
                 <img src="https://via.placeholder.com/250x141" class="card-img-top" alt="Anime Title">
                 <div class="card-body">
@@ -20,39 +19,66 @@
                     <span class="genre-tag">Fantasy</span>
                 </div>
             </div>
-            <!-- More trending cards -->
         </div>
     </section>
 
-    <!-- Latest Releases -->
     <section class="mb-5">
-        <h2 class="mb-4">Latest Releases</h2>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-            <!-- Anime Card -->
-            <div class="col">
-                <a href="anime-detail.html" class="card anime-card h-100">
-                    <img src="https://via.placeholder.com/250x141" class="card-img-top" alt="Anime Title">
-                    <div class="card-body">
-                        <h5 class="card-title">One Piece</h5>
-                        <div class="rating mb-2">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star"></i>
-                            <span class="ms-1">4.0</span>
+        <h2 class="mb-4">Latest Anime</h2>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3">
+            @foreach ($latestReleases as $anime)
+                <div class="col">
+                    <a href="{{ route('anime.show', $anime->slug) }}" class="card anime-card h-100">
+                        <img src="{{ asset('storage/' . $anime->image) }}" class="card-img-top" alt="Anime Title">
+                        <div class="card-body p-2">
+                            <h6 class="card-title mb-1 text-truncate">{{ $anime->title }}</h6>
+                            <div class="rating mb-2">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                                <span class="ms-1">{{ $anime->rating }}</span>
+                            </div>
+                            <small class="text-body-secondary">Episodes: {{ $anime->episodes }}</small>
+                            <div class="mt-2">
+                                @foreach ($anime->genres as $genre)
+                                    <span class="genre-tag small">{{ $genre->name }}</span>
+                                @endforeach
+                            </div>
                         </div>
-                        <p class="card-text">
-                            <small class="text-body-secondary">Episodes: 1000+</small>
-                        </p>
-                        <div class="mb-3">
-                            <span class="genre-tag">Adventure</span>
-                            <span class="genre-tag">Action</span>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="mb-4">Latest Episodes</h2>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3">
+            @foreach ($latestReleases as $anime)
+                <div class="col">
+                    <a href="{{ route('anime.show', $anime->slug) }}" class="card anime-card h-100">
+                        <img src="{{ asset('storage/' . $anime->image) }}" class="card-img-top" alt="Anime Title">
+                        <div class="card-body p-2">
+                            <h6 class="card-title mb-1 text-truncate">{{ $anime->title }}</h6>
+                            <div class="rating mb-2">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                                <span class="ms-1">{{ $anime->rating }}</span>
+                            </div>
+                            <small class="text-body-secondary">Episodes: {{ $anime->episodes }}</small>
+                            <div class="mt-2">
+                                @foreach ($anime->genres as $genre)
+                                    <span class="genre-tag small">{{ $genre->name }}</span>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-            <!-- More anime cards -->
+                    </a>
+                </div>
+            @endforeach
         </div>
     </section>
 @endsection

@@ -5,20 +5,21 @@
         </button>
         <div class="collapse navbar-collapse" id="adminNavbar">
             <div class="navbar-nav">
-                <a href="{{ route('dashboard.index') }}" class="nav-item nav-link {{ request()->url() == route('dashboard.index') ? 'active' : '' }}">
+                <a href="{{ route('dashboard.index') }}"
+                    class="nav-item nav-link {{ request()->url() == route('dashboard.index') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2 me-2"></i>Dashboard
                 </a>
-                <a href="#" class="nav-item nav-link">
+                <a href="{{ route('anime-list.index') }}" class="nav-item nav-link">
                     <i class="bi bi-collection-play me-2"></i>Anime
+                </a>
+                <a href="{{ route('genre.index') }}"
+                    class="nav-item nav-link {{ request()->url() == route('genre.index') ? 'active' : '' }}">
+                    <i class="bi bi-tags me-2"></i>Genres
                 </a>
                 <a href="#" class="nav-item nav-link">
                     <i class="bi bi-people me-2"></i>Users
-                </a>
-                <a href="{{ route('genre.index') }}" class="nav-item nav-link {{ request()->url() == route('genre.index') ? 'active' : '' }}">
-                    <i class="bi bi-tags me-2"></i>Genres
                 </a>
             </div>
         </div>
     </div>
 </nav>
-
