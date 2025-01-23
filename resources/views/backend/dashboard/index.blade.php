@@ -31,7 +31,7 @@
                             <div class="card bg-body-tertiary border-0">
                                 <div class="card-body">
                                     <h6 class="text-muted">Total Users</h6>
-                                    <h3 class="mb-0">0</h3>
+                                    <h3 class="mb-0">{{ $totalUser }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                             <div class="card bg-body-tertiary border-0">
                                 <div class="card-body">
                                     <h6 class="text-muted">Total Genre</h6>
-                                    <h3 class="mb-0">0</h3>
+                                    <h3 class="mb-0">{{ $totalGenre }}</h3>
                                 </div>
                             </div>
                         </div>

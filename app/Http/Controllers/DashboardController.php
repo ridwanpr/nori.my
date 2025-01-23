@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\View\View;
+use App\Models\User;
+use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class DashboardController extends Controller
 {
     public function index(): View
     {
-        return view('backend.dashboard.index');
+        $totalUser = User::count();
+        $totalGenre = Genre::count();
+
+        return view('backend.dashboard.index', compact('totalUser', 'totalGenre'));
     }
 }
