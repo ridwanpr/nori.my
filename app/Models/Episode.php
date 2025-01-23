@@ -16,6 +16,10 @@ class Episode extends Model
         'content'
     ];
 
+    protected $casts = [
+        'content' => 'array',
+    ];
+
     public $timestamps = false;
 
     public function anime(): BelongsTo

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Anime;
+use App\Models\Genre;
+use App\Models\Episode;
 use Illuminate\Http\Request;
+use App\Models\TrendingAnime;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
-use App\Models\Genre;
-use App\Models\TrendingAnime;
 
 class AnimeListController extends Controller
 {
@@ -29,5 +30,14 @@ class AnimeListController extends Controller
         $trendingAnime->increment('weekly_views');
 
         return view('frontend.anime_detail', compact('anime'));
+    }
+
+    public function watchEpisode($slug, $episodeSlug): View
+    {
+        $anime = Anime::with('episode')->where('slug', $slug)->firstOrFail();
+        $episode = $anime->episode->where('ep_slug', $episodeSlug)
+            ->where('anime_id', $anime->id)->firstOrFail();
+
+        return view('frontend.anime_watch', compact('episode', 'anime'));
     }
 }

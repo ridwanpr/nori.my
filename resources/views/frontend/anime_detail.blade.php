@@ -21,7 +21,7 @@
             </div>
             <p class="mb-4">{{ $anime->synopsis }}</p>
             <div class="d-flex  gap-2">
-                <a href="" class="btn btn-primary">
+                <a href="{{ route('watch-episode', [$anime->slug, $anime->episode[0]->ep_slug]) }}" class="btn btn-primary">
                     <i class="bi bi-play-fill me-2"></i>Watch Episode 1
                 </a>
             </div>
@@ -57,14 +57,18 @@
             </div>
             <div class="col-lg-8">
                 <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
-                    <h3>Episode List</h3>
+                    <h3>Episodes</h3>
                 </div>
                 <div class="episode-grid">
                     @foreach ($anime->episode as $episode)
-                        <a href="#" class="episode-card">{{ $episode->ep_number }}</a>
+                        <a href="{{ route('watch-episode', [$anime->slug, $episode->ep_slug]) }}"
+                            class="episode-card">{{ $episode->ep_number }}</a>
                     @endforeach
                 </div>
             </div>
         </div>
     </div>
 @endsection
+@push('js')
+    @vite('resources/js/detail.js')
+@endpush

@@ -14,7 +14,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('anime', [AnimeListController::class, 'index'])->name('anime.index');
 Route::get('anime/{slug}', [AnimeListController::class, 'show'])->name('anime.show');
-Route::view('anime-watch', 'frontend.anime_watch');
+Route::get('anime/{slug}/{episodeSlug}', [AnimeListController::class, 'watchEpisode'])->name('watch-episode');
 
 Route::get('login', [AuthController::class, 'getLoginPage'])->name('login');
 Route::post('login', [AuthController::class, 'postLogin'])->name('login.post');
