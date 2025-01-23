@@ -1,13 +1,11 @@
 @extends('layouts.app')
 @section('content')
-    <!-- Anime Banner -->
     <div class="row">
         <div class="col-md-4 mb-4 mb-md-0">
             <img src="{{ asset('storage/' . $anime->image) }}" class="img-fluid rounded-3 shadow" alt="{{ $anime->title }}">
         </div>
         <div class="col-md-8">
             <h1 class="mb-3">{{ $anime->title }}</h1>
-
             <div class="d-flex align-items-center gap-3 mb-3">
                 <div class="rating">
                     @for ($i = 0; $i < 5; $i++)
@@ -28,9 +26,7 @@
                     <span class="badge bg-secondary me-1">{{ $genre->name }}</span>
                 @endforeach
             </div>
-
             <p class="mb-4">{{ $anime->synopsis }}</p>
-
             <div class="d-flex gap-2">
                 <a href="" class="btn btn-primary">
                     <i class="bi bi-play-fill me-2"></i>Watch Episode 1
@@ -38,28 +34,22 @@
             </div>
         </div>
     </div>
-
-    <!-- Episode List -->
-    <div class="container py-5">
+    <div class="py-5">
         <div class="row">
             <div class="col-lg-4">
                 <div class="info-sidebar rounded-3">
-                    <h4 class="mb-4">Information</h4>
+                    <h4 class="mb-2">Information</h4>
                     <div class="info-item">
-                        <span class="info-label">Status</span>
-                        <span class="info-value">Ongoing</span>
+                        <span class="info-label">Studio:</span>
+                        <span class="info-value">{{ $anime->studio }}</span>
                     </div>
                     <div class="info-item">
-                        <span class="info-label">Studios</span>
-                        <span class="info-value">Toei Animation</span>
+                        <span class="info-label">Year:</span>
+                        <span class="info-value">{{ $anime->year }}</span>
                     </div>
                     <div class="info-item">
-                        <span class="info-label">Premiered</span>
-                        <span class="info-value">Fall 1999</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Duration</span>
-                        <span class="info-value">23 min per ep</span>
+                        <span class="info-label">Duration:</span>
+                        <span class="info-value">{{ $anime->duration }} min per ep</span>
                     </div>
                 </div>
             </div>

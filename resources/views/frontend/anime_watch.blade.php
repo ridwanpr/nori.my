@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    <!-- Video Player Section -->
     <div class="video-container">
         <div class="container-fluid px-0">
             <div class="video-wrapper">
@@ -13,7 +12,6 @@
         </div>
     </div>
 
-    <!-- Episode Information -->
     <div class="container py-4">
         <div class="row">
             <div class="col-lg-8">
@@ -49,7 +47,6 @@
                 </div>
             </div>
 
-            <!-- Episode List Sidebar -->
             <div class="col-lg-4">
                 <div class="episodes-sidebar">
                     <h4 class="mb-3">Episodes</h4>
@@ -64,7 +61,6 @@
                         <a href="#" class="episode-item">8</a>
                         <a href="#" class="episode-item">9</a>
                         <a href="#" class="episode-item">10</a>
-                        <!-- More episodes -->
                     </div>
                 </div>
             </div>

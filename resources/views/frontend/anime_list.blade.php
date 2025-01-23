@@ -8,7 +8,6 @@
                 <li class="breadcrumb-item active">Anime List</li>
             </ol>
         </nav>
-
         <div class="row">
             <div class="col-sm-12 col-lg-3 mb-4">
                 <div class="filter-sidebar p-3 rounded-3 border">
@@ -22,7 +21,6 @@
                             </div>
                         @endforeach
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label">Season</label>
                         <select class="form-select">
@@ -31,7 +29,6 @@
                             <option>Summer 2023</option>
                         </select>
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label">Status</label>
                         <select class="form-select">
@@ -40,7 +37,6 @@
                             <option>Completed</option>
                         </select>
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label">Sort By</label>
                         <select class="form-select">
@@ -51,7 +47,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-9">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                     @foreach ($animes as $anime)
