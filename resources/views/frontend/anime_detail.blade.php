@@ -57,15 +57,12 @@
             </div>
             <div class="col-lg-8">
                 <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
-                    <h3>Episodes</h3>
+                    <h3>Episode List</h3>
                 </div>
                 <div class="episode-grid">
-                    <a href="#" class="episode-card active">1</a>
-                    <a href="#" class="episode-card">2</a>
-                    <a href="#" class="episode-card">3</a>
-                    <a href="#" class="episode-card">4</a>
-                    <a href="#" class="episode-card">5</a>
-                    <a href="#" class="episode-card">6</a>
+                    @foreach ($anime->episode as $episode)
+                        <a href="#" class="episode-card">{{ $episode->ep_number }}</a>
+                    @endforeach
                 </div>
             </div>
         </div>

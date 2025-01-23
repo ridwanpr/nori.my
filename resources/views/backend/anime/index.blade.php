@@ -38,6 +38,7 @@
                                         <td>{{ ucfirst($anime->status) }}</td>
                                         <td>{{ $anime->created_at->format('Y-m-d') }}</td>
                                         <td>
+                                            <a href="{{ route('episode-list.index', $anime->id) }}" class="btn btn-sm btn-info"><i class="bi bi-eye"></i> Episode</a>
                                             <a href="{{ route('anime-list.edit', $anime->id) }}"
                                                 class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i> Edit</a>
                                             <form action="{{ route('anime-list.destroy', $anime->id) }}" method="POST"
@@ -54,11 +55,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="pagination-wrapper">
-                        <!-- Pagination controls go here -->
-                        <button class="btn btn-outline-secondary">Previous</button>
-                        <button class="btn btn-outline-secondary">Next</button>
-                    </div>
+                    {{ $animes->links() }}
                 </div>
             </div>
         </div>

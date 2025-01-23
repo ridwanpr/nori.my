@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnimeController;
+use App\Http\Controllers\AnimeEpisodeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GenreController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,10 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth', 'checkRoles:admin']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
+    Route::get('episode-list/{id}', [AnimeEpisodeController::class, 'index'])->name('episode-list.index');
+    Route::get('episode-list/create/{id}', [AnimeEpisodeController::class, 'create'])->name('episode-list.create');
+    Route::post('episode-list/store/{id}', [AnimeEpisodeController::class, 'store'])->name('episode-list.store');
 
     Route::resource('genre', GenreController::class);
     Route::resource('anime-list', AnimeController::class);

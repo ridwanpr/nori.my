@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Anime extends Model
@@ -29,5 +30,10 @@ class Anime extends Model
     public function trending(): HasOne
     {
         return $this->hasOne(TrendingAnime::class);
+    }
+
+    public function episode(): HasMany
+    {
+        return $this->hasMany(Episode::class);
     }
 }

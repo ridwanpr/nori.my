@@ -20,15 +20,14 @@ class AnimeListController extends Controller
 
     public function show($slug): View
     {
-        $anime = Anime::with('genres')->where('slug', $slug)->firstOrFail();
-
+        $anime = Anime::with('genres', 'episode')->where('slug', $slug)->firstOrFail();
         $trendingAnime = TrendingAnime::where('anime_id', $anime->id)->firstOrCreate(
             ['anime_id' => $anime->id],
             ['weekly_views' => 0]
         );
 
         $trendingAnime->increment('weekly_views');
-        
+
         return view('frontend.anime_detail', compact('anime'));
     }
 }
