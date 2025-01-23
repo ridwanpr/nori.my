@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
 use App\Models\Genre;
+use App\Models\TrendingAnime;
 
 class AnimeListController extends Controller
 {
@@ -20,6 +21,14 @@ class AnimeListController extends Controller
     public function show($slug): View
     {
         $anime = Anime::with('genres')->where('slug', $slug)->firstOrFail();
+
+        $trendingAnime = TrendingAnime::where('anime_id', $anime->id)->firstOrCreate(
+            ['anime_id' => $anime->id],
+            ['weekly_views' => 0]
+        );
+
+        $trendingAnime->increment('weekly_views');
+        
         return view('frontend.anime_detail', compact('anime'));
     }
 }

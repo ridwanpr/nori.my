@@ -62,7 +62,6 @@ body {
 /* Anime Card */
 .anime-card {
     transition: all 0.3s ease;
-    border: none;
     overflow: hidden;
     text-decoration: none;
     color: inherit;
@@ -341,20 +340,6 @@ body {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-    .filter-sidebar {
-        position: fixed;
-        left: -100%;
-        top: 0;
-        height: 100vh;
-        z-index: 1040;
-        background: var(--bs-body-bg);
-        transition: left 0.3s ease;
-    }
-
-    .filter-sidebar.show {
-        left: 0;
-    }
-
     .anime-banner {
         min-height: auto;
         padding: 2rem 0;
@@ -418,20 +403,6 @@ body {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-    .filter-sidebar {
-        position: fixed;
-        left: -100%;
-        top: 0;
-        height: 100vh;
-        z-index: 1040;
-        background: var(--bs-body-bg);
-        transition: left 0.3s ease;
-    }
-
-    .filter-sidebar.show {
-        left: 0;
-    }
-
     .anime-banner {
         min-height: auto;
         padding: 2rem 0;
