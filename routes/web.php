@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GenreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Frontend\BookmarkController;
@@ -20,6 +21,8 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth', 'checkRoles:admin']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
+    Route::resource('genre', GenreController::class);
 });
 
 Route::group(['middleware' => ['auth', 'checkRoles:user']], function () {

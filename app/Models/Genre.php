@@ -11,7 +11,7 @@ class Genre extends Model
     protected $table = 'genres';
 
     protected $fillable = [
-        'name',
+        'name', 'slug'
     ];
 
     public function anime(): BelongsToMany

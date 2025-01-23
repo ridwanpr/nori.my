@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,8 +17,8 @@ return new class extends Migration
         });
 
         DB::table('roles')->insert([
-            ['id' => 1, 'name' => 'Admin'],
-            ['id' => 2, 'name' => 'User'],
+            ['id' => 1, 'name' => 'admin'],
+            ['id' => 2, 'name' => 'user'],
         ]);
 
         Schema::create('users', function (Blueprint $table) {

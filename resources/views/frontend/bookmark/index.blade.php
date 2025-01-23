@@ -91,7 +91,7 @@
                 <div class="text-center py-4 d-none">
                     <i class="bi bi-bookmark-heart h3 text-muted"></i>
                     <p class="small text-muted mb-2">No bookmarks yet</p>
-                    <a href="/anime-list" class="btn btn-sm btn-primary">Explore Anime</a>
+                    <a href="" class="btn btn-sm btn-primary">Explore Anime</a>
                 </div>
             </div>
         </div>
@@ -100,7 +100,8 @@
         <div class="text-center py-4">
             <p class="mb-2">You need an account to use the bookmark feature</p>
             <a href="{{ route('login') }}" class="btn btn-login"><i class="bi bi-box-arrow-in-right me-1"></i> Login</a>
-            <a href="{{ route('register') }}" class="btn btn-primary"><i class="bi bi-person-plus me-1"></i> Register</a>
+            <a href="{{ route('register') }}" class="btn btn-primary"><i class="bi bi-person-plus me-1"></i>
+                Register</a>
         </div>
     @endguest
 @endsection
