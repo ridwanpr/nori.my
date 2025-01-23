@@ -20,4 +20,8 @@ window.addEventListener('DOMContentLoaded', () => {
     if (savedTheme) {
         document.documentElement.setAttribute('data-bs-theme', savedTheme);
     }
+
+    document.getElementById('rating').addEventListener('input', function (e) {
+        this.value = this.value.replace(/[^0-9]/g, '').substring(0, 1);
+    });
 });
