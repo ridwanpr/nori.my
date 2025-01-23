@@ -9,21 +9,17 @@
         </nav>
 
         <div class="row">
-            <!-- Filters Sidebar -->
             <div class="col-lg-3 mb-4">
                 <div class="filter-sidebar p-3 rounded-3 border">
                     <h4>Filters</h4>
                     <div class="mb-3">
                         <label class="form-label">Genres</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="action">
-                            <label class="form-check-label" for="action">Action</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="romance">
-                            <label class="form-check-label" for="romance">Romance</label>
-                        </div>
-                        <!-- Add more genres -->
+                        @foreach ($genres as $genre)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="genre-{{ $genre->id }}">
+                                <label class="form-check-label" for="genre-{{ $genre->id }}">{{ $genre->name }}</label>
+                            </div>
+                        @endforeach
                     </div>
 
                     <div class="mb-3">
@@ -55,50 +51,40 @@
                 </div>
             </div>
 
-            <!-- Anime Grid -->
             <div class="col-lg-9">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                    <!-- Anime Card -->
-                    <div class="col">
-                        <a href="anime-detail.html" class="card anime-card h-100">
-                            <img src="https://via.placeholder.com/250x141" class="card-img-top" alt="Anime Title">
-                            <div class="card-body">
-                                <h5 class="card-title">One Piece</h5>
-                                <div class="rating mb-2">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i>
-                                    <span class="ms-1">4.0</span>
+                    @foreach ($animes as $anime)
+                        <div class="col">
+                            <a href="{{ route('anime.show', $anime->slug) }}" class="card anime-card h-100">
+                                <img src="{{ asset('storage/' . $anime->image) }}" class="card-img-top"
+                                    alt="{{ $anime->title }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $anime->title }}</h5>
+                                    <div class="rating mb-2">
+                                        @for ($i = 0; $i < 5; $i++)
+                                            @if ($i < floor($anime->rating))
+                                                <i class="bi bi-star-fill"></i>
+                                            @else
+                                                <i class="bi bi-star"></i>
+                                            @endif
+                                        @endfor
+                                        <span class="ms-1">{{ $anime->rating }}</span>
+                                    </div>
+                                    <p class="card-text">
+                                        <small class="text-body-secondary">Episodes: {{ $anime->episodes }}</small>
+                                    </p>
+                                    <div class="mb-3">
+                                        @foreach ($anime->genres as $genre)
+                                            <span class="genre-tag">{{ $genre->name }}</span>
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <p class="card-text">
-                                    <small class="text-body-secondary">Episodes: 1000+</small>
-                                </p>
-                                <div class="mb-3">
-                                    <span class="genre-tag">Adventure</span>
-                                    <span class="genre-tag">Action</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- More anime cards -->
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
 
-                <!-- Pagination -->
-                <nav class="mt-4">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
+              {{ $animes->links() }}
             </div>
         </div>
     </section>

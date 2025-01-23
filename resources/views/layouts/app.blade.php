@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Nori</title>
     @vite(['resources/css/app.css', 'resources/css/nori.css', 'resources/js/app.js'])
+    @stack('css')
 </head>
 
 <body>
