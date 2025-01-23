@@ -1,9 +1,4 @@
 @extends('layouts.app')
-@push('css')
-    <style>
-
-    </style>
-@endpush
 @section('content')
     <div class="video-container">
         <div class="container-fluid px-0">
@@ -38,7 +33,7 @@
                 </nav>
 
                 <div class="episode-info-card p-4 rounded-3">
-                    <h1 class="h3 mb-3">Episode {{ $episode->ep_number }} {{ $episode->ep_title }}</h1>
+                    <h1 class="h3 mb-3 text-capitalize">{{ $anime->title }} {{ $episode->ep_title }}</h1>
                     <div class="d-flex gap-3 mb-4">
                         <span class="text-body-secondary">{{ $anime->duration }}m</span>
                         <span class="text-body-secondary">{{ $anime->year }}</span>
@@ -46,17 +41,6 @@
                     <p class="mb-4">
                         {{ $anime->synopsis }}
                     </p>
-
-                    <div class="episode-navigation">
-                        <button class="btn btn-outline-secondary" disabled>
-                            <i class="bi bi-chevron-left"></i>
-                            <span>Ep. 1</span>
-                        </button>
-                        <button class="btn btn-next ms-auto">
-                            <span>Ep. 2</span>
-                            <i class="bi bi-chevron-right"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
 
@@ -64,7 +48,7 @@
                 <div class="episodes-sidebar">
                     <h4 class="mb-3">Episodes</h4>
                     <div class="episode-list">
-                        @foreach ($anime->episode as $ep)
+                        @foreach ($episodes as $ep)
                             <a href="{{ route('watch-episode', [$anime->slug, $ep->ep_slug]) }}"
                                 class="episode-card">{{ $ep->ep_number }}</a>
                         @endforeach

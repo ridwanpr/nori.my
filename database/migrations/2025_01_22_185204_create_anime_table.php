@@ -42,7 +42,6 @@ return new class extends Migration
             $table->string('ep_slug', 50);
             $table->string('quality', 20);
             $table->text('content');
-            $table->string('server', 20);
 
             $table->foreign('anime_id')->references('id')->on('anime')->onDelete('cascade');
         });

@@ -22,9 +22,6 @@
                         <i class="bi bi-tags me-2"></i>Genres
                     </a>
                 </li>
-                <li class="nav-item px-2">
-                    <a class="nav-link" href="/anime-watch">Anime Watch</a>
-                </li>
                 @guest
                     <li class="nav-item px-2">
                         <a class="nav-link" href="{{ route('bookmark.index') }}">Bookmark</a>

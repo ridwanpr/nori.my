@@ -13,7 +13,8 @@ class Episode extends Model
         'ep_number',
         'ep_title',
         'ep_slug',
-        'content'
+        'content',
+        'quality',
     ];
 
     protected $casts = [

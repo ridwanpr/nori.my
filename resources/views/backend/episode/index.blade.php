@@ -31,7 +31,7 @@
                                         <td>{{ $episode->ep_title }}</td>
                                         <td>{{ $episode->ep_slug }}</td>
                                         <td>
-                                            <a href="" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i> Edit</a>
+                                            <a href="{{ route('episode-list.edit', $episode->id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i> Edit</a>
                                             <form action="" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')

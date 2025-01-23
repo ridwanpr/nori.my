@@ -29,7 +29,8 @@ class AnimeEpisodeController extends Controller
             'ep_number' => 'required|max:20',
             'ep_title' => 'required|string|max:50',
             'content_urls' => 'required|array',
-            'content_urls.*' => 'url'
+            'content_urls.*' => 'url',
+            'quality' => 'required'
         ]);
 
         $episode = new Episode();
@@ -37,10 +38,39 @@ class AnimeEpisodeController extends Controller
         $episode->ep_number = $validatedData['ep_number'];
         $episode->ep_title = $validatedData['ep_title'];
         $episode->ep_slug = Str::slug($validatedData['ep_title']);
+        $episode->quality = $request->input('quality');
         $episode->content = json_encode($validatedData['content_urls']);
         $episode->save();
 
         return redirect()->route('episode-list.index', $id)
             ->with('success', 'Episode added successfully');
+    }
+
+    public function edit($id): View
+    {
+        $episode = Episode::findOrFail($id);
+        $contentUrls = json_decode($episode->content, true);
+        return view('backend.episode.edit', compact('episode', 'contentUrls'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'ep_number' => 'required|integer',
+            'ep_title' => 'required|string|max:255',
+            'content_urls' => 'required|array',
+            'content_urls.*' => 'url'
+        ]);
+
+        $episode = Episode::findOrFail($id);
+        $episode->ep_number = $validatedData['ep_number'];
+        $episode->ep_title = $validatedData['ep_title'];
+        $episode->ep_slug = \Str::slug($validatedData['ep_title']);
+        $episode->content = json_encode($validatedData['content_urls']);
+        $episode->quality = $request->input('quality');
+        $episode->save();
+
+        return redirect()->route('episode-list.index', $episode->anime_id)
+            ->with('success', 'Episode updated successfully');
     }
 }

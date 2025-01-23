@@ -35,13 +35,16 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Name</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($genres as $genre)
+                                        @foreach ($genres as $key => $genre)
                                             <tr>
+                                                <td>{{ ($genres->currentPage() - 1) * $genres->perPage() + $loop->iteration }}
+                                                </td>
                                                 <td>{{ $genre->name }}</td>
                                                 <td>
                                                     <a href="{{ route('genre.edit', $genre->id) }}"
@@ -62,7 +65,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
                             <div class="pagination-wrapper">
                                 {{ $genres->links() }}
                             </div>

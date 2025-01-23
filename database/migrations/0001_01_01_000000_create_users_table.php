@@ -34,6 +34,10 @@ return new class extends Migration {
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
 
+        DB::table('users')->insert([
+            ['role_id' => 1, 'name' => 'admin', 'email' => 'admin@nori.my', 'password' => bcrypt('nedoeci202')],
+        ]);
+
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
