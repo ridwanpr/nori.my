@@ -45,7 +45,7 @@
                     </ol>
                 </nav>
                 <div class="episode-info-card p-4 rounded-3">
-                    <h1 class="h3 mb-3 text-capitalize">{{ $anime->title }} {{ $episode->ep_title }}</h1>
+                    <h1 class="h3 mb-3 text-capitalize">{{ $anime->title }} <br> {{ $episode->ep_title }}</h1>
                     <div class="d-flex gap-3 mb-4">
                         <span class="text-body-secondary">{{ $anime->duration }}m</span>
                         <span class="text-body-secondary">{{ $anime->year }}</span>
