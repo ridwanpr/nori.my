@@ -19,14 +19,16 @@
                         <i class="bi bi-play-fill me-2"></i>Watch Episode 1
                     </a>
                 @endif
-                @if (auth()->user()->role_id == 2)
-                    <button type="button"
-                        class="btn {{ $isBookmarked ? 'bg-success text-white bookmarked' : 'bg-warning text-dark' }}"
-                        id="bookmark-btn" data-id="{{ $anime->id }}">
-                        <i class="bi {{ $isBookmarked ? 'bi-bookmark-heart-fill' : 'bi-bookmark-heart' }} me-2"></i>
-                        {{ $isBookmarked ? 'Remove Bookmark' : 'Add to Bookmark' }}
-                    </button>
-                @endif
+                @auth
+                    @if (auth()->user()->role_id == 2)
+                        <button type="button"
+                            class="btn {{ $isBookmarked ? 'bg-success text-white bookmarked' : 'bg-warning text-dark' }}"
+                            id="bookmark-btn" data-id="{{ $anime->id }}">
+                            <i class="bi {{ $isBookmarked ? 'bi-bookmark-heart-fill' : 'bi-bookmark-heart' }} me-2"></i>
+                            {{ $isBookmarked ? 'Remove Bookmark' : 'Add to Bookmark' }}
+                        </button>
+                    @endif
+                @endauth
             </div>
         </div>
     </div>
