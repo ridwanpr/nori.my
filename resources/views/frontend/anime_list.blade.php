@@ -65,27 +65,24 @@
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
                     @foreach ($animes as $anime)
                         <div class="col-6 col-md-4">
-                            <a href="{{ route('anime.show', $anime->slug) }}" class="text-decoration-none">
-                                <div class="card h-100 position-relative">
-                                    <div class="card-image position-relative">
+                            <a href="{{ route('anime.show', $anime->slug) }}" class="anime-card-link">
+                                <div class="anime-card position-relative">
+                                    <div class="anime-card-image position-relative">
                                         <img src="{{ asset('storage/' . $anime->image) }}"
-                                            class="card-img-top object-cover h-100 w-100" alt="{{ $anime->title }}">
-                                        {{-- <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-2">
-                                            <i class="bi bi-star-fill me-1"></i> 8
-                                        </span> --}}
-                                    </div>
-                                    <div class="card-body text-center p-1">
-                                        <h2 class="card-title fs-6 fw-bold text-truncate mb-0">{{ $anime->title }}</h2>
-                                        <div class="my-1">
-                                            <span class="badge bg-dark text-light">{{ $anime->year }}</span>
-                                            @if ($anime->genres->count() > 0)
+                                            class="img-fluid object-cover w-100" style="aspect-ratio: 2/3;"
+                                            alt="{{ $anime->title }}">
+                                        <div style="right: 5px; top: 4px" class="position-absolute top-0 end-0">
+                                            <span class="badge bg-warning text-dark">{{ $anime->rating ?? '' }}</span>
+                                        </div>
+                                        <div
+                                            class="anime-card-overlay position-absolute bottom-0 start-0 w-100 bg-dark bg-opacity-75 p-2 text-center">
+                                            <h2 class="card-title fs-6 fw-bold text-truncate text-white mb-1">
+                                                {{ $anime->title }}</h2>
+                                            <div class="d-flex justify-content-center gap-2 small">
+                                                <span class="badge bg-secondary">{{ $anime->year }}</span>
                                                 <span
-                                                    class="badge bg-dark text-light">{{ $anime->genres->first()->name }}</span>
-                                            @endif
-                                            <span class="badge bg-dark text-light">
-                                                <i class="bi bi-star-fill"></i>
-                                                9
-                                            </span>
+                                                    class="badge bg-secondary">{{ $anime->genres->first()->name ?? '' }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -93,9 +90,7 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="mt-4">
-                    {{ $animes->links() }}
-                </div>
+                {{ $animes->links() }}
             </div>
         </div>
     </section>

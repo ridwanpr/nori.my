@@ -8,24 +8,26 @@
             <div class="row g-3 overflow-auto pb-3">
                 @foreach ($trendingAnime as $trending)
                     <div class="col-auto">
-                        <a href="{{ route('anime.show', $trending->anime->slug) }}"
-                            class="text-decoration-none anime-card-link">
-                            <div class="card anime-card bg-dark border-0 shadow-lg">
-                                <div class="card-image position-relative overflow-hidden">
+                        <a href="{{ route('anime.show', $trending->anime->slug) }}" class="anime-card-link">
+                            <div class="anime-card position-relative">
+                                <div class="anime-card-image position-relative">
                                     <img src="{{ asset('storage/' . $trending->anime->image) }}"
-                                        class="card-img-top object-fit-cover" style="height: 200px; width: 135px;"
+                                        class="img-fluid object-cover w-100" style="height: 200px; width: 135px;"
                                         alt="{{ $trending->anime->title }}">
-                                    <div
-                                        class="card-info-overlay position-absolute bottom-0 start-0 w-100 bg-dark bg-opacity-75 p-2 text-center">
-                                        <h3 class="card-title fs-6 fw-semibold text-truncate mb-1 text-white">
-                                            {{ $trending->anime->title }}</h3>
-                                        <div class="text-white small">
-                                            <span>{{ $trending->anime->year }}</span> •
-                                            <span>{{ $trending->anime->genres->first()->name ?? '' }}</span>
-                                        </div>
+                                    <div style="right: 4px; top: 4px" class="position-absolute">
+                                        <span class="badge bg-danger text-white p-2">
+                                            <i class="bi bi-fire"></i>
+                                        </span>
                                     </div>
-                                    <div class="position-absolute top-2 end-2">
-                                        <span class="badge bg-danger rounded-pill">Trending</span>
+                                    <div
+                                        class="anime-card-overlay position-absolute bottom-0 start-0 w-100 bg-dark bg-opacity-75 p-2 text-center">
+                                        <h2 class="card-title fs-6 fw-bold text-truncate text-white mb-1">
+                                            {{ $trending->anime->title }}</h2>
+                                        <div class="d-flex justify-content-center gap-2 small">
+                                            <span class="badge bg-secondary">{{ $trending->anime->year }}</span>
+                                            <span
+                                                class="badge bg-secondary">{{ $trending->anime->genres->first()->name ?? '' }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -41,23 +43,24 @@
             <h2 class="h5 fw-bold text-light mb-3">Latest Update</h2>
             <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
                 @foreach ($latestReleases as $anime)
-                    <div class="col">
-                        <a href="{{ route('anime.show', $anime->slug) }}" class="text-decoration-none anime-card-link">
-                            <div class="card anime-card bg-dark border-0 shadow-lg">
-                                <div class="card-image position-relative">
-                                    <img src="{{ asset('storage/' . $anime->image) }}" class="card-img-top object-fit-cover"
+                    <div class="col-6 col-md-4">
+                        <a href="{{ route('anime.show', $anime->slug) }}" class="anime-card-link">
+                            <div class="anime-card position-relative">
+                                <div class="anime-card-image position-relative">
+                                    <img src="{{ asset('storage/' . $anime->image) }}" class="img-fluid object-cover w-100"
                                         style="aspect-ratio: 2/3;" alt="{{ $anime->title }}">
-                                    <div
-                                        class="card-info-overlay position-absolute bottom-0 start-0 w-100 bg-dark bg-opacity-75 p-2 text-center">
-                                        <h3 class="card-title fs-6 fw-semibold text-truncate mb-1 text-white">
-                                            {{ $anime->title }}</h3>
-                                        <div class="text-white small">
-                                            <span>{{ $anime->year }}</span> •
-                                            <span>{{ $anime->genres->first()->name ?? '' }}</span>
-                                        </div>
+                                    <div style="right: 5px; top: 4px" class="position-absolute top-0 end-0">
+                                        <span class="badge bg-warning text-dark">{{ $anime->rating ?? '' }}</span>
                                     </div>
-                                    <div class="position-absolute top-2 end-2">
-                                        <span class="badge bg-danger rounded-pill">Trending</span>
+                                    <div
+                                        class="anime-card-overlay position-absolute bottom-0 start-0 w-100 bg-dark bg-opacity-75 p-2 text-center">
+                                        <h2 class="card-title fs-6 fw-bold text-truncate text-white mb-1">
+                                            {{ $anime->title }}</h2>
+                                        <div class="d-flex justify-content-center gap-2 small">
+                                            <span class="badge bg-secondary">{{ $anime->year }}</span>
+                                            <span
+                                                class="badge bg-secondary">{{ $anime->genres->first()->name ?? '' }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
