@@ -25,7 +25,8 @@
                                     <label for="password_confirmation" class="form-label">Confirm Password</label>
                                     <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                                 </div>
-                                <div class="d-grid gap-2">
+                                <x-turnstile />
+                                <div class="d-grid gap-2 mt-3">
                                     <button type="submit" class="btn btn-primary">Register</button>
                                 </div>
                                 <p class="text-center mt-3">Already have an account? <a href="{{ route('login') }}">Login</a></p>

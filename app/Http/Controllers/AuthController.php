@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -27,6 +28,7 @@ class AuthController extends Controller
             'name' => 'required|max:50',
             'email' => 'required|email|unique:users|max:100',
             'password' => 'required|min:8|confirmed',
+            'cf-turnstile-response' => app()->environment('production') ? ['required', Rule::turnstile()] : [],
         ]);
 
         $user = User::create([
@@ -46,6 +48,7 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+            'cf-turnstile-response' => app()->environment('production') ? ['required', Rule::turnstile()] : [],
         ]);
 
         if (Auth::attempt($credentials)) {

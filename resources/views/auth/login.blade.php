@@ -18,7 +18,8 @@
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
-                                <div class="d-grid gap-2">
+                                <x-turnstile />
+                                <div class="d-grid gap-2 mt-3">
                                     <button type="submit" class="btn btn-primary">Login</button>
                                 </div>
                                 <p class="text-center mt-3">Don't have an account? <a
