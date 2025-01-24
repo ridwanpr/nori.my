@@ -11,58 +11,74 @@ use App\Models\TrendingAnime;
 use App\Jobs\IncrementViewCount;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class AnimeListController extends Controller
 {
     public function index(Request $request): View
     {
-        $query = Anime::with('genres');
+        $cacheKey = 'anime_list_' . $request->fullUrl();
+        $animes = Cache::remember($cacheKey, now()->addDay(), function () use ($request) {
+            $query = Anime::with('genres');
 
-        if ($request->has('search') && $request->input('search')) {
-            $query->where('title', 'like', '%' . $request->input('search') . '%');
-        }
-
-        if ($request->has('genres') && is_array($request->input('genres'))) {
-            $query->whereHas('genres', function ($q) use ($request) {
-                $q->whereIn('genres.id', $request->input('genres'));
-            });
-        }
-
-        if ($request->filled('year')) {
-            $query->where('year', $request->input('year'));
-        }
-
-        if ($request->filled('status')) {
-            $query->where('status', $request->input('status'));
-        }
-
-        if ($request->filled('sort_by')) {
-            switch ($request->input('sort_by')) {
-                case 'popularity':
-                    $query->leftJoin('trending_anime', 'anime.id', '=', 'trending_anime.anime_id')
-                        ->orderBy('trending_anime.weekly_views', 'desc');
-                    break;
-                case 'latest':
-                    $query->orderBy('created_at', 'desc');
-                    break;
+            if ($request->has('search') && $request->input('search')) {
+                $query->where('title', 'like', '%' . $request->input('search') . '%');
             }
-        }
 
-        $animes = $query->paginate(10);
-        $genres = Genre::orderBy('name')->get();
+            if ($request->has('genres') && is_array($request->input('genres'))) {
+                $query->whereHas('genres', function ($q) use ($request) {
+                    $q->whereIn('genres.id', $request->input('genres'));
+                });
+            }
+
+            if ($request->filled('year')) {
+                $query->where('year', $request->input('year'));
+            }
+
+            if ($request->filled('status')) {
+                $query->where('status', $request->input('status'));
+            }
+
+            if ($request->filled('sort_by')) {
+                switch ($request->input('sort_by')) {
+                    case 'popularity':
+                        $query->leftJoin('trending_anime', 'anime.id', '=', 'trending_anime.anime_id')
+                            ->orderBy('trending_anime.weekly_views', 'desc');
+                        break;
+                    case 'latest':
+                        $query->orderBy('created_at', 'desc');
+                        break;
+                }
+            }
+
+            return $query->paginate(10);
+        });
+
+        $genres = Cache::remember('genres', now()->addDay(), function () {
+            return Genre::orderBy('name')->get();
+        });
 
         return view('frontend.anime_list', compact('animes', 'genres'));
     }
 
     public function show($slug): View
     {
-        $anime = Anime::with('genres', 'episode')->where('slug', $slug)->firstOrFail();
+        $anime = Cache::remember('anime_' . $slug, now()->addDay(), function () use ($slug) {
+            return Anime::with('genres', 'episode')
+                ->where('slug', $slug)
+                ->firstOrFail();
+        });
+
+        $cacheKey = 'anime_' . $anime->id . '_view_count';
+        Cache::increment($cacheKey);
 
         IncrementViewCount::dispatch($anime->id)->delay(now()->addSeconds(5));
 
-        $isBookmarked = Bookmark::where('user_id', auth()->id())
-            ->where('anime_id', $anime->id)
-            ->exists();
+        $isBookmarked = Cache::remember('bookmark_' . auth()->id() . '_anime_' . $anime->id, now()->addDay(), function () use ($anime) {
+            return Bookmark::where('user_id', auth()->id())
+                ->where('anime_id', $anime->id)
+                ->exists();
+        });
 
         return view('frontend.anime_detail', compact('anime', 'isBookmarked'));
     }

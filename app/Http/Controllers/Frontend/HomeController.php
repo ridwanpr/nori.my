@@ -7,13 +7,18 @@ use App\Models\Anime;
 use App\Models\TrendingAnime;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
     public function index(): View
     {
-        $latestReleases = Anime::with('genres')->orderBy('updated_at', 'desc')->latest()->take(18)->get();
-        $trendingAnime = TrendingAnime::with('anime')->orderBy('weekly_views', 'desc')->take(8)->get();
+        $latestReleases = Cache::remember('latest_releases', now()->addDay(), function () {
+            return Anime::with('genres')->orderBy('updated_at', 'desc')->latest()->take(18)->get();
+        });
+        $trendingAnime = Cache::remember('trending_anime', now()->addDay(), function () {
+            return TrendingAnime::with('anime')->orderBy('weekly_views', 'desc')->take(8)->get();
+        });
 
         return view('welcome', compact('latestReleases', 'trendingAnime'));
     }
