@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@push('meta_seo')
+    <meta name="description"
+        content="Nonton {{ $anime->title }} sub indo online streaming di Nori.my. Tersedia dalam kualitas HD, update harian, dan gratis. Nikmati anime terlengkap dan terbaru hanya di sini.">
+@endpush
 @section('content')
     <div class="row gy-4 align-items-center">
         <div class="col-md-4">

@@ -1,5 +1,8 @@
 @extends('layouts.app')
-
+@push('meta_seo')
+    <meta name="description"
+        content="Kelola dan nonton anime favorit Anda di Nori.my. Akses bookmark anime sub indo dengan mudah, streaming kualitas HD, dan gratis.">
+@endpush
 @section('content')
     @auth
         <div class="row g-2">

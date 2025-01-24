@@ -1,5 +1,10 @@
 @extends('layouts.app')
-
+@push('meta_seo')
+    @push('meta_seo')
+        <meta name="description"
+            content="Temukan ribuan anime sub indo terlengkap di Nori.my. Streaming dan download anime terbaru, klasik, dan populer dengan kualitas HD, gratis tanpa biaya.">
+    @endpush
+@endpush
 @section('content')
     <section id="anime-list">
         <nav aria-label="breadcrumb">

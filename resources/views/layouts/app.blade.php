@@ -6,11 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description"
-        content="Nonton anime sub Indo dan streaming anime dengan subtitle Indonesia di Nori. Temukan anime favorit Anda dengan mudah dan nikmati pengalaman menonton terbaik secara gratis.">
-    <meta name="keywords"
-        content="nonton anime sub Indo, streaming anime, anime subtitle Indonesia, anime terbaru, anime populer, Nori, gratis">
-    <title>Nori</title>
+    @if (request()->is('/'))
+        <meta name="description"
+            content="Nonton anime sub Indo gratis di Nori! Streaming ribuan anime terbaru, klasik, dan populer dengan kualitas HD. Update harian, lengkap, dan akses cepat.">
+    @else
+        @stack('meta_seo')
+    @endif
+    @if (request()->is('/'))
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Nori.my",
+            "url": "https://nori.my",
+            "description": "Situs streaming anime sub Indo gratis dengan ribuan judul terbaru, klasik, dan populer dalam kualitas HD.",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://nori.my/anime?search={search_term}",
+                "query-input": "required name=search_term"
+            }
+        }
+        </script>
+    @else
+        @stack('schema')
+    @endif
+    <title>Nonton Anime Sub Indo Gratis | Streaming Terlengkap - Nori.my</title>
     @turnstileScripts()
     @vite(['resources/css/app.css', 'resources/css/nori.css', 'resources/js/app.js'])
     @stack('css')
