@@ -33,7 +33,13 @@
             <div class="alert alert-info d-flex align-items-center" role="alert">
                 <i class="bi bi-info-circle-fill me-2"></i>
                 <div class="text-white">
-                    If the video cannot be played, please switch to another server.
+                    Jika video tidak dapat diputar, silakan pilih server lainnya.
+                </div>
+            </div>
+            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                <div class="text-white">
+                    Video mungkin memiliki iklan atau yang berasal dari hoster video dan <strong>bukan</strong> dari Nori, so be careful.
                 </div>
             </div>
             <div class="d-flex flex-wrap gap-2">
