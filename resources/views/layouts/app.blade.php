@@ -34,6 +34,8 @@
     @endif
 
     @stack('js')
+
+    @vite('resources/js/hisats')
 </body>
 
 </html>
