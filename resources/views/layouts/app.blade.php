@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @if (request()->is('/'))
         <meta name="description"
-            content="Nonton anime sub Indo gratis di Nori! Streaming ribuan anime terbaru, klasik, dan populer dengan kualitas HD. Update harian, lengkap, dan akses cepat.">
+            content="Nonton anime sub Indo gratis di Nori! Streaming anime terbaru, klasik, dan populer dengan kualitas HD. Update harian, lengkap, dan akses cepat.">
     @else
         @stack('meta_seo')
     @endif
@@ -19,7 +19,7 @@
             "@type": "WebSite",
             "name": "Nori.my",
             "url": "https://nori.my",
-            "description": "Situs streaming anime sub Indo gratis dengan ribuan judul terbaru, klasik, dan populer dalam kualitas HD.",
+            "description": "Situs streaming anime sub Indo gratis dengan judul terbaru, klasik, dan populer dalam kualitas HD.",
             "potentialAction": {
                 "@type": "SearchAction",
                 "target": "https://nori.my/anime?search={search_term}",
