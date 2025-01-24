@@ -18,10 +18,12 @@
             <p class="text-muted mb-4">{{ $anime->synopsis }}</p>
 
             <div class="d-flex gap-3 flex-wrap">
-                <a href="{{ route('watch-episode', [$anime->slug, $anime->episode[0]->ep_slug]) }}"
-                    class="btn btn-primary btn-lg btn-sm-md">
-                    <i class="bi bi-play-fill me-2"></i>Watch Episode 1
-                </a>
+                @if ($anime->episode->count() > 0)
+                    <a href="{{ route('watch-episode', [$anime->slug, $anime->episode[0]->ep_slug]) }}"
+                        class="btn btn-primary btn-lg btn-sm-md">
+                        <i class="bi bi-play-fill me-2"></i>Watch Episode 1
+                    </a>
+                @endif
                 @guest
                     <a href="{{ route('bookmark.index') }}" class="btn btn-outline-secondary text-white btn-lg btn-sm-md">
                         <i class="bi bi-bookmark-heart me-2"></i>Add to Bookmark
