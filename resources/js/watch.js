@@ -25,8 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const wrapper = iframe.parentElement;
 
     function adjustIframe() {
-        const wrapperWidth = wrapper.offsetWidth * 0.8;
+        const isMobile = window.innerWidth <= 768;
+        const wrapperWidth = isMobile ? wrapper.offsetWidth : wrapper.offsetWidth * 0.8;
         const wrapperHeight = wrapperWidth * 9 / 16;
+
         iframe.style.width = `${wrapperWidth}px`;
         iframe.style.height = `${wrapperHeight}px`;
     }
@@ -34,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     adjustIframe();
     window.addEventListener('resize', adjustIframe);
 });
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const iframe = document.getElementById('video-player');
