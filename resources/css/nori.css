@@ -483,9 +483,18 @@ body {
 }
 
 .anime-image {
-    max-width: 100%; 
+    max-width: 100%;
     max-height: 400px;
     object-fit: cover;
     display: block;
     margin: auto;
+}
+
+#disqus_thread {
+    color: initial !important;
+    background-color: initial !important;
+}
+
+iframe {
+    color-scheme: light;
 }

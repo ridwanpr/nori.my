@@ -17,7 +17,8 @@
             </div>
             <div class="d-flex flex-wrap gap-2">
                 @foreach ($episode->content as $index => $url)
-                    <button class="btn {{ $index == 0 ? 'btn-primary' : 'btn-secondary' }} switch-server-btn" data-url="{{ $url }}">
+                    <button class="btn {{ $index == 0 ? 'btn-primary' : 'btn-secondary' }} switch-server-btn"
+                        data-url="{{ $url }}">
                         Server {{ $index + 1 }}
                     </button>
                 @endforeach
@@ -61,6 +62,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="bg-dark p-4 rounded mt-4">
+        @include('layouts.partials.disqus-comment')
     </div>
 @endsection
 
