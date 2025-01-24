@@ -40,7 +40,10 @@
 
     <section class="latest-anime mb-4">
         <div class="container-fluid px-3">
-            <h2 class="h5 fw-bold text-light mb-3">Latest Update</h2>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h5 fw-bold text-light">Latest Update</h2>
+                <a href="{{ route('anime.index') }}" class="text-decoration-none text-light">Browse All</a>
+            </div>
             <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
                 @foreach ($latestReleases as $anime)
                     <div class="col-6 col-md-4">
