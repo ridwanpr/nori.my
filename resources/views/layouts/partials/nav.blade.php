@@ -49,9 +49,9 @@
                     @endif
                 @endauth
             </div>
-            <button class="btn theme-toggle ms-3" onclick="toggleTheme()">
+            {{-- <button class="btn theme-toggle ms-3" onclick="toggleTheme()">
                 <i class="bi bi-moon-stars"></i>
-            </button>
+            </button> --}}
         </div>
     </div>
 </nav>

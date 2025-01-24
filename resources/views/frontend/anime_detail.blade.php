@@ -1,4 +1,12 @@
 @extends('layouts.app')
+@push('css')
+    <style>
+        #disqus_thread {
+            color: initial !important;
+            background-color: initial !important;
+        }
+    </style>
+@endpush
 @section('content')
     <div class="row gy-4 align-items-center">
         <div class="col-md-4">
@@ -74,6 +82,10 @@
                 @endforeach
             </div>
         </div>
+    </div>
+
+    <div class="bg-dark p-4 rounded">
+        @include('layouts.partials.disqus-comment')
     </div>
 @endsection
 @push('js')
