@@ -12,7 +12,7 @@ class AnimeController extends Controller
 {
     public function index(): View
     {
-        $animes = Anime::with('genres')->paginate(15);
+        $animes = Anime::with('genres')->latest()->paginate(15);
         return view('backend.anime.index', compact('animes'));
     }
 
