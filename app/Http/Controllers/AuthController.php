@@ -31,6 +31,8 @@ class AuthController extends Controller
             'cf-turnstile-response' => app()->environment('production') ? ['required', Rule::turnstile()] : [],
         ]);
 
+        unset($validated['cf-turnstile-response']);
+
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
@@ -50,6 +52,8 @@ class AuthController extends Controller
             'password' => 'required',
             'cf-turnstile-response' => app()->environment('production') ? ['required', Rule::turnstile()] : [],
         ]);
+
+        unset($credentials['cf-turnstile-response']);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
