@@ -66,7 +66,7 @@
     </div>
 @endsection
 @push('js')
-    @if (auth()->user()->role_id == 2)
+    @if (auth()->guest() || auth()->user()->role_id == 2)
         @vite('resources/js/detail.js')
     @endif
 @endpush
