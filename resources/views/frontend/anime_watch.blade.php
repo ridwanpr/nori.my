@@ -39,7 +39,7 @@
             <div class="alert alert-warning d-flex align-items-center" role="alert">
                 <i class="bi bi-exclamation-triangle-fill me-2"></i>
                 <div class="text-white">
-                    Video mungkin memiliki iklan atau yang berasal dari hoster video dan <strong>bukan</strong> dari Nori, so be careful.
+                    Video mungkin memiliki iklan yang berasal dari hoster video dan <strong>bukan</strong> dari Nori, so be careful.
                 </div>
             </div>
             <div class="d-flex flex-wrap gap-2">
