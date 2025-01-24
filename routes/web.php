@@ -60,19 +60,20 @@ Route::get('/sitemap.xml', function () {
         ->setPriority(0.8)
         ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY));
 
-    $animeList = \App\Models\Anime::all();
-    foreach ($animeList as $anime) {
-        $sitemap->add(Url::create("anime/{$anime->slug}")
-            ->setPriority(0.7)
-            ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY));
-
-        $episodes = $anime->episode; 
-        foreach ($episodes as $episode) {
-            $sitemap->add(Url::create("anime/{$anime->slug}/{$episode->ep_slug}")
-                ->setPriority(0.6)
+    \App\Models\Anime::chunk(100, function ($animes) use ($sitemap) {
+        foreach ($animes as $anime) {
+            $sitemap->add(Url::create("anime/{$anime->slug}")
+                ->setPriority(0.7)
                 ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY));
+
+            $episodes = $anime->episode;
+            foreach ($episodes as $episode) {
+                $sitemap->add(Url::create("anime/{$anime->slug}/{$episode->ep_slug}")
+                    ->setPriority(0.6)
+                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY));
+            }
         }
-    }
+    });
 
     return Response::make($sitemap->render(), 200, ['Content-Type' => 'application/xml']);
 });
