@@ -9,6 +9,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Frontend\AnimeListController;
 use App\Http\Controllers\Frontend\BookmarkController;
 use App\Http\Controllers\Frontend\HomeController;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
+use Illuminate\Support\Facades\Response;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -44,4 +47,32 @@ Route::group(['middleware' => ['auth', 'checkRoles:user']], function () {
     Route::post('bookmark/{id}', [BookmarkController::class, 'store'])->name('bookmark.store');
     Route::delete('bookmark/{anime}', [BookmarkController::class, 'destroy'])->name('bookmark.destroy');
     Route::delete('bookmark/delete/{id}', [BookmarkController::class, 'delete'])->name('bookmark.delete');
+});
+
+Route::get('/sitemap.xml', function () {
+    $sitemap = Sitemap::create();
+
+    $sitemap->add(Url::create('/')
+        ->setPriority(1.0)
+        ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY));
+
+    $sitemap->add(Url::create('anime')
+        ->setPriority(0.8)
+        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY));
+
+    $animeList = \App\Models\Anime::all();
+    foreach ($animeList as $anime) {
+        $sitemap->add(Url::create("anime/{$anime->slug}")
+            ->setPriority(0.7)
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY));
+
+        $episodes = $anime->episode; 
+        foreach ($episodes as $episode) {
+            $sitemap->add(Url::create("anime/{$anime->slug}/{$episode->ep_slug}")
+                ->setPriority(0.6)
+                ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY));
+        }
+    }
+
+    return Response::make($sitemap->render(), 200, ['Content-Type' => 'application/xml']);
 });
