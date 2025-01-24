@@ -13,9 +13,12 @@
             </div>
             <p class="mb-5">{{ $anime->synopsis }}</p>
             <div class="d-flex gap-2 justify-content-start">
-                <a href="{{ route('watch-episode', [$anime->slug, $anime->episode[0]->ep_slug]) }}" class="btn btn-primary">
-                    <i class="bi bi-play-fill me-2"></i>Watch Episode 1
-                </a>
+                @if ($anime->episode->count() > 0)
+                    <a href="{{ route('watch-episode', [$anime->slug, $anime->episode[0]->ep_slug]) }}"
+                        class="btn btn-primary">
+                        <i class="bi bi-play-fill me-2"></i>Watch Episode 1
+                    </a>
+                @endif
                 @if (auth()->user()->role_id == 2)
                     <button type="button"
                         class="btn {{ $isBookmarked ? 'bg-success text-white bookmarked' : 'bg-warning text-dark' }}"
