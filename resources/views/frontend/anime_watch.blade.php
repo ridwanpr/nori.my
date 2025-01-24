@@ -1,8 +1,17 @@
 @extends('layouts.app')
+@push('css')
+    <style>
+        #video-player {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            height: auto;
+        }
+    </style>
+@endpush
 @section('content')
     <div class="video-container">
         <div class="container-fluid px-0">
-            <div class="video-wrapper">
+            <div class="video-wrapper bg-dark">
                 <iframe id="video-player" width="100%" height="100%" frameborder="0" style="display:block" allowfullscreen
                     src="{{ $episode->content[0] }}"></iframe>
             </div>
