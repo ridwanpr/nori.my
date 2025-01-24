@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-site-verification" content="3YJEL3qM5RMzMrxfjcKLNsyOPdDDLwuJkpc1V2RKOuE" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description"
         content="Nonton anime sub Indo dan streaming anime dengan subtitle Indonesia di Nori. Temukan anime favorit Anda dengan mudah dan nikmati pengalaman menonton terbaik secara gratis.">
