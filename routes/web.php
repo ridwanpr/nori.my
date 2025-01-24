@@ -40,4 +40,8 @@ Route::group(['middleware' => ['auth', 'checkRoles:admin']], function () {
 Route::get('bookmark', [BookmarkController::class, 'index'])->name('bookmark.index');
 
 
-Route::group(['middleware' => ['auth', 'checkRoles:user']], function () {});
+Route::group(['middleware' => ['auth', 'checkRoles:user']], function () {
+    Route::post('bookmark/{id}', [BookmarkController::class, 'store'])->name('bookmark.store');
+    Route::delete('bookmark/{anime}', [BookmarkController::class, 'destroy'])->name('bookmark.destroy');
+    Route::delete('bookmark/delete/{id}', [BookmarkController::class, 'delete'])->name('bookmark.delete');
+});

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Anime;
 use App\Models\Genre;
 use App\Models\Episode;
+use App\Models\Bookmark;
 use Illuminate\Http\Request;
 use App\Models\TrendingAnime;
 use Illuminate\Contracts\View\View;
@@ -29,7 +30,11 @@ class AnimeListController extends Controller
 
         $trendingAnime->increment('weekly_views');
 
-        return view('frontend.anime_detail', compact('anime'));
+        $isBookmarked = Bookmark::where('user_id', auth()->id())
+            ->where('anime_id', $anime->id)
+            ->exists();
+
+        return view('frontend.anime_detail', compact('anime', 'isBookmarked'));
     }
 
     public function watchEpisode($slug, $episodeSlug): View

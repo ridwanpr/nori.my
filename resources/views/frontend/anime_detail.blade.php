@@ -6,33 +6,22 @@
         </div>
         <div class="col-md-8">
             <h1 class="mb-3">{{ $anime->title }}</h1>
-            <div class="d-flex align-items-center gap-3 mb-3">
-                <div class="rating">
-                    <i class="bi bi-star-fill"></i>
-                    <span class="ms-2">9.5 / 10</span>
-                </div>
-                <span class="badge bg-success text-capitalize">{{ $anime->status }}</span>
-            </div>
-
             <div class="mb-3">
                 @foreach ($anime->genres as $genre)
-                    <span class="badge bg-secondary me-1">{{ $genre->name }}</span>
+                    <span class="badge bg-success me-1">{{ $genre->name }}</span>
                 @endforeach
             </div>
-            <p class="mb-4">{{ $anime->synopsis }}</p>
-            <div class="d-flex  gap-2">
+            <p class="mb-5">{{ $anime->synopsis }}</p>
+            <div class="d-flex gap-2 justify-content-start">
                 <a href="{{ route('watch-episode', [$anime->slug, $anime->episode[0]->ep_slug]) }}" class="btn btn-primary">
                     <i class="bi bi-play-fill me-2"></i>Watch Episode 1
                 </a>
-            </div>
-            <div class="mt-4">
-                <form action="" method="POST" class="d-flex align-items-center">
-                    @csrf
-                    <label for="rating" class="me-2 mb-0">Your Rating:</label>
-                    <input type="text" name="rating" id="rating" class="form-control me-2 text-center"
-                        style="width: 3rem;" maxlength="1" placeholder="0">
-                    <button type="submit" class="btn btn-outline-secondary">Submit</button>
-                </form>
+                <button type="button"
+                    class="btn {{ $isBookmarked ? 'bg-success text-white bookmarked' : 'bg-warning text-dark' }}"
+                    id="bookmark-btn" data-id="{{ $anime->id }}">
+                    <i class="bi {{ $isBookmarked ? 'bi-bookmark-heart-fill' : 'bi-bookmark-heart' }} me-2"></i>
+                    {{ $isBookmarked ? 'Remove Bookmark' : 'Add to Bookmark' }}
+                </button>
             </div>
         </div>
     </div>

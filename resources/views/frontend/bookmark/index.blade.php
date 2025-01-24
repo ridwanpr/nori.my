@@ -8,11 +8,6 @@
                     <h5 class="mb-0">Bookmarks</h5>
                     <hr>
                     <div class="d-flex align-items-center">
-                        <select class="form-select form-select-sm w-auto me-2">
-                            <option>Recently Added</option>
-                            <option>Title (A-Z)</option>
-                            <option>Rating</option>
-                        </select>
                         <form method="POST" action="{{ route('logout') }}" class="d-inline">
                             @csrf
                             <button type="submit" class="btn btn-sm btn-danger">Logout</button>
@@ -20,74 +15,40 @@
                     </div>
                 </div>
 
-                <!-- Compact Bookmarks Grid -->
                 <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-2">
-                    <!-- Bookmark Item -->
-                    <div class="col">
-                        <div class="card h-100  shadow-sm">
-                            <img src="/placeholder-anime-1.jpg" class="card-img-top" alt="Anime Title 1">
-                            <div class="card-body p-2">
-                                <h6 class="card-title mb-1 text-truncate">Attack on Titan</h6>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">Ep: 24</small>
-                                    <button type="button" class="btn btn-sm p-0 text-danger">
-                                        <i class="bi bi-bookmark-x"></i>
-                                    </button>
+                    @forelse ($bookmarks as $bookmark)
+                        <div class="flex-shrink-0" style="width: 180px;">
+                            <a href="{{ route('anime.show', $bookmark->anime->slug) }}"
+                                class="card shadow-sm overflow-hidden text-decoration-none">
+                                <div class="position-relative">
+                                    <img src="{{ asset('storage/' . $bookmark->anime->image) }}"
+                                        class="card-img-top object-fit-cover" style="height: 250px;"
+                                        alt="{{ $bookmark->anime->title }}">
+                                    <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-1">
+                                        <i class="bi bi-star-fill me-1"></i>{{ $bookmark->rating ?? '8' }}
+                                    </span>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bookmark Item -->
-                    <div class="col">
-                        <div class="card h-100  shadow-sm">
-                            <img src="/placeholder-anime-2.jpg" class="card-img-top" alt="Anime Title 2">
-                            <div class="card-body p-2">
-                                <h6 class="card-title mb-1 text-truncate">Demon Slayer</h6>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">Ep: 26</small>
-                                    <button type="button" class="btn btn-sm p-0 text-danger">
-                                        <i class="bi bi-bookmark-x"></i>
-                                    </button>
+                                <div class="card-body p-1">
+                                    <h6 class="card-title text-truncate text-center">{{ $bookmark->anime->title }}</h6>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bookmark Item -->
-                    <div class="col">
-                        <div class="card h-100  shadow-sm">
-                            <img src="/placeholder-anime-3.jpg" class="card-img-top" alt="Anime Title 3">
-                            <div class="card-body p-2">
-                                <h6 class="card-title mb-1 text-truncate">My Hero Academia</h6>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">Ep: 25</small>
-                                    <button type="button" class="btn btn-sm p-0 text-danger">
-                                        <i class="bi bi-bookmark-x"></i>
-                                    </button>
+                                <div class="position-absolute top-0 end-0 m-1">
+                                    <form action="{{ route('bookmark.delete', $bookmark->id) }}" method="POST"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger"><i
+                                                class="bi bi-bookmark-x"></i></button>
+                                    </form>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                    </div>
-
-                    <!-- Bookmark Item -->
-                    <div class="col">
-                        <div class="card h-100  shadow-sm">
-                            <img src="/placeholder-anime-4.jpg" class="card-img-top" alt="Anime Title 4">
-                            <div class="card-body p-2">
-                                <h6 class="card-title mb-1 text-truncate">Death Note</h6>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">Ep: 37</small>
-                                    <button type="button" class="btn btn-sm p-0 text-danger">
-                                        <i class="bi bi-bookmark-x"></i>
-                                    </button>
-                                </div>
-                            </div>
+                    @empty
+                        <div class="alert alert-info text-center d-block" role="alert">
+                            <i class="bi bi-info-circle-fill me-1"></i>
+                            No bookmarks
                         </div>
-                    </div>
+                    @endforelse
                 </div>
-
-                <!-- Compact Empty State -->
                 <div class="text-center py-4 d-none">
                     <i class="bi bi-bookmark-heart h3 text-muted"></i>
                     <p class="small text-muted mb-2">No bookmarks yet</p>

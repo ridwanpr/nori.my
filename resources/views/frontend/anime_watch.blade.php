@@ -9,10 +9,15 @@
         </div>
 
         <div class="server-switcher mt-3">
-            <h5>Switch Server:</h5>
+            <div class="alert alert-info d-flex align-items-center" role="alert">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                <div class="text-white">
+                    If the video cannot be played, please switch to another server.
+                </div>
+            </div>
             <div class="d-flex flex-wrap gap-2">
                 @foreach ($episode->content as $index => $url)
-                    <button class="btn btn-secondary switch-server-btn" data-url="{{ $url }}">
+                    <button class="btn {{ $index == 0 ? 'btn-primary' : 'btn-secondary' }} switch-server-btn" data-url="{{ $url }}">
                         Server {{ $index + 1 }}
                     </button>
                 @endforeach

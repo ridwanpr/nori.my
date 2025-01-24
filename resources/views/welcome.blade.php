@@ -14,7 +14,7 @@
         <div class="trending-scroll d-flex overflow-auto gap-3 pb-3">
             @foreach ($trendingAnime as $anime)
                 <div class="trending-card flex-shrink-0" style="width: 180px;">
-                    <div class="card shadow-sm overflow-hidden">
+                    <a href="{{ route('anime.show', $anime->anime->slug) }}" class="card shadow-sm overflow-hidden text-decoration-none">
                         <div class="position-relative">
                             <img src="{{ asset('storage/' . $anime->anime->image) }}" class="card-img-top object-fit-cover"
                                 style="height: 250px;" alt="{{ $anime->anime->title }}">
@@ -26,10 +26,45 @@
                             <h5 class="card-title text-truncate mb-1">{{ $anime->anime->title }}</h5>
                             <div class="d-flex justify-content-between small text-muted">
                                 <span>{{ $anime->anime->year }}</span>
-                                <span>{{ $anime->anime->status }}</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
+                </div>
+
+                <div class="trending-card flex-shrink-0" style="width: 180px;">
+                    <a href="{{ route('anime.show', $anime->anime->slug) }}" class="card shadow-sm overflow-hidden text-decoration-none">
+                        <div class="position-relative">
+                            <img src="{{ asset('storage/' . $anime->anime->image) }}" class="card-img-top object-fit-cover"
+                                style="height: 250px;" alt="{{ $anime->anime->title }}">
+                            <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-1">
+                                <i class="bi bi-star-fill me-1"></i>{{ $anime->rating ?? '8' }}
+                            </span>
+                        </div>
+                        <div class="card-body p-2">
+                            <h5 class="card-title text-truncate mb-1">{{ $anime->anime->title }}</h5>
+                            <div class="d-flex justify-content-between small text-muted">
+                                <span>{{ $anime->anime->year }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="trending-card flex-shrink-0" style="width: 180px;">
+                    <a href="{{ route('anime.show', $anime->anime->slug) }}" class="card shadow-sm overflow-hidden text-decoration-none">
+                        <div class="position-relative">
+                            <img src="{{ asset('storage/' . $anime->anime->image) }}" class="card-img-top object-fit-cover"
+                                style="height: 250px;" alt="{{ $anime->anime->title }}">
+                            <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-1">
+                                <i class="bi bi-star-fill me-1"></i>{{ $anime->rating ?? '8' }}
+                            </span>
+                        </div>
+                        <div class="card-body p-2">
+                            <h5 class="card-title text-truncate mb-1">{{ $anime->anime->title }}</h5>
+                            <div class="d-flex justify-content-between small text-muted">
+                                <span>{{ $anime->anime->year }}</span>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             @endforeach
         </div>
@@ -52,9 +87,9 @@
                             <div class="card-body p-2 text-center">
                                 <h3 class="card-title fs-6 text-truncate mb-1">{{ $anime->title }}</h3>
                                 <div class="d-flex justify-content-center small">
-                                    <span class="badge bg-secondary me-1">{{ $anime->year }}</span>
+                                    <span class="badge bg-dark me-1">{{ $anime->year }}</span>
                                     @if ($anime->genres->count() > 0)
-                                        <span class="badge bg-secondary">
+                                        <span class="badge bg-dark">
                                             {{ $anime->genres->first()->name }}
                                         </span>
                                     @endif
