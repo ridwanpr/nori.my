@@ -16,12 +16,14 @@
                 <a href="{{ route('watch-episode', [$anime->slug, $anime->episode[0]->ep_slug]) }}" class="btn btn-primary">
                     <i class="bi bi-play-fill me-2"></i>Watch Episode 1
                 </a>
-                <button type="button"
-                    class="btn {{ $isBookmarked ? 'bg-success text-white bookmarked' : 'bg-warning text-dark' }}"
-                    id="bookmark-btn" data-id="{{ $anime->id }}">
-                    <i class="bi {{ $isBookmarked ? 'bi-bookmark-heart-fill' : 'bi-bookmark-heart' }} me-2"></i>
-                    {{ $isBookmarked ? 'Remove Bookmark' : 'Add to Bookmark' }}
-                </button>
+                @if (auth()->user()->role_id == 2)
+                    <button type="button"
+                        class="btn {{ $isBookmarked ? 'bg-success text-white bookmarked' : 'bg-warning text-dark' }}"
+                        id="bookmark-btn" data-id="{{ $anime->id }}">
+                        <i class="bi {{ $isBookmarked ? 'bi-bookmark-heart-fill' : 'bi-bookmark-heart' }} me-2"></i>
+                        {{ $isBookmarked ? 'Remove Bookmark' : 'Add to Bookmark' }}
+                    </button>
+                @endif
             </div>
         </div>
     </div>
@@ -59,5 +61,7 @@
     </div>
 @endsection
 @push('js')
-    @vite('resources/js/detail.js')
+    @if (auth()->user()->role_id == 2)
+        @vite('resources/js/detail.js')
+    @endif
 @endpush

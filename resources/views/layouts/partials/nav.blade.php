@@ -17,20 +17,17 @@
                         <i class="bi bi-collection-play me-2"></i>Browse Anime
                     </a>
                 </li>
-                <li class="nav-item px-2">
-                    <a class="nav-link" href="">
-                        <i class="bi bi-tags me-2"></i>Genres
-                    </a>
-                </li>
                 @guest
                     <li class="nav-item px-2">
                         <a class="nav-link" href="{{ route('bookmark.index') }}">Bookmark</a>
                     </li>
                 @endguest
             </ul>
-            <form class="d-flex search-bar me-3" role="search">
-                <input class="form-control" type="search" placeholder="Search anime...">
+            <form class="d-flex search-bar me-3" role="search" method="GET" action="{{ route('anime.index') }}">
+                <input class="form-control" type="search" placeholder="Search anime..." name="search"
+                    value="{{ request('search') }}">
             </form>
+
             <div class="auth-buttons ms-lg-2">
                 @guest
                     <a href="{{ route('login') }}" class="btn btn-auth btn-login">

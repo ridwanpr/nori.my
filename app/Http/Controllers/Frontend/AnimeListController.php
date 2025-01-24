@@ -13,12 +13,46 @@ use App\Http\Controllers\Controller;
 
 class AnimeListController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $animes = Anime::with('genres')->paginate(10);
+        $query = Anime::with('genres');
+
+        if ($request->has('search') && $request->input('search')) {
+            $query->where('title', 'like', '%' . $request->input('search') . '%');
+        }
+
+        if ($request->has('genres') && is_array($request->input('genres'))) {
+            $query->whereHas('genres', function ($q) use ($request) {
+                $q->whereIn('genres.id', $request->input('genres'));
+            });
+        }
+
+        if ($request->filled('year')) {
+            $query->where('year', $request->input('year'));
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->input('status'));
+        }
+
+        if ($request->filled('sort_by')) {
+            switch ($request->input('sort_by')) {
+                case 'popularity':
+                    $query->leftJoin('trending_anime', 'anime.id', '=', 'trending_anime.anime_id')
+                        ->orderBy('trending_anime.weekly_views', 'desc');
+                    break;
+                case 'latest':
+                    $query->orderBy('created_at', 'desc');
+                    break;
+            }
+        }
+
+        $animes = $query->paginate(10);
         $genres = Genre::orderBy('name')->get();
+
         return view('frontend.anime_list', compact('animes', 'genres'));
     }
+
 
     public function show($slug): View
     {
