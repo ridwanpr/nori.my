@@ -42,6 +42,8 @@ class AnimeEpisodeController extends Controller
         $episode->content = json_encode($validatedData['content_urls']);
         $episode->save();
 
+        Anime::where('id', $id)->update(['created_at' => now()]);
+
         return redirect()->route('episode-list.index', $id)
             ->with('success', 'Episode added successfully');
     }
