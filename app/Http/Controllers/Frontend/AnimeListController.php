@@ -8,6 +8,7 @@ use App\Models\Episode;
 use App\Models\Bookmark;
 use Illuminate\Http\Request;
 use App\Models\TrendingAnime;
+use App\Jobs\IncrementViewCount;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
 
@@ -56,12 +57,8 @@ class AnimeListController extends Controller
     public function show($slug): View
     {
         $anime = Anime::with('genres', 'episode')->where('slug', $slug)->firstOrFail();
-        $trendingAnime = TrendingAnime::where('anime_id', $anime->id)->firstOrCreate(
-            ['anime_id' => $anime->id],
-            ['weekly_views' => 0]
-        );
 
-        $trendingAnime->increment('weekly_views');
+        IncrementViewCount::dispatch($anime->id)->delay(now()->addSeconds(5));
 
         $isBookmarked = Bookmark::where('user_id', auth()->id())
             ->where('anime_id', $anime->id)
