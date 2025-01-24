@@ -53,7 +53,6 @@ class AnimeListController extends Controller
         return view('frontend.anime_list', compact('animes', 'genres'));
     }
 
-
     public function show($slug): View
     {
         $anime = Anime::with('genres', 'episode')->where('slug', $slug)->firstOrFail();
