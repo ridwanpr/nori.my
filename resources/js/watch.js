@@ -25,8 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const wrapper = iframe.parentElement;
 
     function adjustIframe() {
-        const wrapperWidth = wrapper.offsetWidth;
+        const wrapperWidth = wrapper.offsetWidth * 0.8;
         const wrapperHeight = wrapperWidth * 9 / 16;
+        iframe.style.width = `${wrapperWidth}px`;
         iframe.style.height = `${wrapperHeight}px`;
     }
 
