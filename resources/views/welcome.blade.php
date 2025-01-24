@@ -19,9 +19,6 @@
                         <div class="position-relative">
                             <img src="{{ asset('storage/' . $anime->anime->image) }}" class="card-img-top object-fit-cover"
                                 style="height: 250px;" alt="{{ $anime->anime->title }}">
-                            <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-1">
-                                <i class="bi bi-star-fill me-1"></i>{{ $anime->rating ?? '8' }}
-                            </span>
                         </div>
                         <div class="card-body p-1">
                             <h6 class="card-title text-truncate text-center">{{ $anime->anime->title }}</h6>
@@ -42,9 +39,6 @@
                             <div class="position-relative">
                                 <img src="{{ asset('storage/' . $anime->image) }}"
                                     class="card-img-top ratio-2x3 object-fit-cover" alt="{{ $anime->title }}">
-                                <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-1">
-                                    <i class="bi bi-star-fill me-1"></i>{{ $anime->rating ?? '8' }}
-                                </span>
                             </div>
                             <div class="card-body p-2 text-center">
                                 <h3 class="card-title fs-6 text-truncate mb-1">{{ $anime->title }}</h3>

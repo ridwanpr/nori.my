@@ -70,9 +70,9 @@
                                     <div class="card-image position-relative">
                                         <img src="{{ asset('storage/' . $anime->image) }}"
                                             class="card-img-top object-cover h-100 w-100" alt="{{ $anime->title }}">
-                                        <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-2">
+                                        {{-- <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-2">
                                             <i class="bi bi-star-fill me-1"></i> 8
-                                        </span>
+                                        </span> --}}
                                     </div>
                                     <div class="card-body text-center p-1">
                                         <h2 class="card-title fs-6 fw-bold text-truncate mb-0">{{ $anime->title }}</h2>
