@@ -35,7 +35,7 @@
 
     @stack('js')
 
-    @vite('resources/js/hisats')
+    @vite('resources/js/histats')
 </body>
 
 </html>
