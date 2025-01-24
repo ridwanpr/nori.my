@@ -14,7 +14,8 @@
         <div class="trending-scroll d-flex overflow-auto gap-3 pb-3">
             @foreach ($trendingAnime as $anime)
                 <div class="trending-card flex-shrink-0" style="width: 180px;">
-                    <a href="{{ route('anime.show', $anime->anime->slug) }}" class="card shadow-sm overflow-hidden text-decoration-none">
+                    <a href="{{ route('anime.show', $anime->anime->slug) }}"
+                        class="card shadow-sm overflow-hidden text-decoration-none">
                         <div class="position-relative">
                             <img src="{{ asset('storage/' . $anime->anime->image) }}" class="card-img-top object-fit-cover"
                                 style="height: 250px;" alt="{{ $anime->anime->title }}">
@@ -22,47 +23,8 @@
                                 <i class="bi bi-star-fill me-1"></i>{{ $anime->rating ?? '8' }}
                             </span>
                         </div>
-                        <div class="card-body p-2">
-                            <h5 class="card-title text-truncate mb-1">{{ $anime->anime->title }}</h5>
-                            <div class="d-flex justify-content-between small text-muted">
-                                <span>{{ $anime->anime->year }}</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="trending-card flex-shrink-0" style="width: 180px;">
-                    <a href="{{ route('anime.show', $anime->anime->slug) }}" class="card shadow-sm overflow-hidden text-decoration-none">
-                        <div class="position-relative">
-                            <img src="{{ asset('storage/' . $anime->anime->image) }}" class="card-img-top object-fit-cover"
-                                style="height: 250px;" alt="{{ $anime->anime->title }}">
-                            <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-1">
-                                <i class="bi bi-star-fill me-1"></i>{{ $anime->rating ?? '8' }}
-                            </span>
-                        </div>
-                        <div class="card-body p-2">
-                            <h5 class="card-title text-truncate mb-1">{{ $anime->anime->title }}</h5>
-                            <div class="d-flex justify-content-between small text-muted">
-                                <span>{{ $anime->anime->year }}</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="trending-card flex-shrink-0" style="width: 180px;">
-                    <a href="{{ route('anime.show', $anime->anime->slug) }}" class="card shadow-sm overflow-hidden text-decoration-none">
-                        <div class="position-relative">
-                            <img src="{{ asset('storage/' . $anime->anime->image) }}" class="card-img-top object-fit-cover"
-                                style="height: 250px;" alt="{{ $anime->anime->title }}">
-                            <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-1">
-                                <i class="bi bi-star-fill me-1"></i>{{ $anime->rating ?? '8' }}
-                            </span>
-                        </div>
-                        <div class="card-body p-2">
-                            <h5 class="card-title text-truncate mb-1">{{ $anime->anime->title }}</h5>
-                            <div class="d-flex justify-content-between small text-muted">
-                                <span>{{ $anime->anime->year }}</span>
-                            </div>
+                        <div class="card-body p-1">
+                            <h6 class="card-title text-truncate text-center">{{ $anime->anime->title }}</h6>
                         </div>
                     </a>
                 </div>
@@ -74,7 +36,7 @@
         <h2 class="h4 mb-3">Latest Anime</h2>
         <div class="row row-cols-3 row-cols-md-4 row-cols-lg-6 g-2">
             @foreach ($latestReleases as $anime)
-                <div class="col">
+                <div class="col-6 col-md-3">
                     <a href="{{ route('anime.show', $anime->slug) }}" class="text-decoration-none">
                         <div class="card border shadow-sm">
                             <div class="position-relative">
