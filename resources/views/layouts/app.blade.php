@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description"
+        content="Nonton anime sub Indo dan streaming anime dengan subtitle Indonesia di Nori. Temukan anime favorit Anda dengan mudah dan nikmati pengalaman menonton terbaik secara gratis.">
+    <meta name="keywords"
+        content="nonton anime sub Indo, streaming anime, anime subtitle Indonesia, anime terbaru, anime populer, Nori, gratis">
     <title>Nori</title>
     @turnstileScripts()
     @vite(['resources/css/app.css', 'resources/css/nori.css', 'resources/js/app.js'])
