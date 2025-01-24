@@ -67,7 +67,7 @@
                 @foreach ($anime->episode as $episode)
                     <div class="col-6 col-sm-4 col-md-3">
                         <a href="{{ route('watch-episode', [$anime->slug, $episode->ep_slug]) }}"
-                            class="btn btn-outline-secondary btn-sm w-100 py-3">
+                            class="btn btn-outline-secondary text-white btn-sm w-100 py-3">
                             Episode {{ $episode->ep_number }}
                         </a>
                     </div>
