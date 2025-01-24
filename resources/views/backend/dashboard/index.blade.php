@@ -23,7 +23,7 @@
                             <div class="card bg-body-tertiary border-0">
                                 <div class="card-body">
                                     <h6 class="text-muted">Total Anime</h6>
-                                    <h3 class="mb-0">0</h3>
+                                    <h3 class="mb-0">{{ $totalAnime }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                             <div class="card bg-body-tertiary border-0">
                                 <div class="card-body">
                                     <h6 class="text-muted">Total Episode</h6>
-                                    <h3 class="mb-0">0</h3>
+                                    <h3 class="mb-0">{{ $totalEpisode }}</h3>
                                 </div>
                             </div>
                         </div>
