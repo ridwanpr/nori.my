@@ -33,3 +33,33 @@ document.addEventListener('DOMContentLoaded', function () {
     adjustIframe();
     window.addEventListener('resize', adjustIframe);
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const iframe = document.getElementById('video-player');
+
+    if (!iframe) {
+        console.error('Video player iframe not found!');
+        return;
+    }
+
+    function lazyLoadIframe() {
+        if (iframe.getAttribute('data-src')) {
+            iframe.src = iframe.getAttribute('data-src');
+            iframe.removeAttribute('data-src');
+        }
+    }
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    lazyLoadIframe();
+                    observer.disconnect();
+                }
+            });
+        });
+        observer.observe(iframe);
+    } else {
+        lazyLoadIframe();
+    }
+});

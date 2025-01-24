@@ -13,10 +13,9 @@
         <div class="container-fluid px-0">
             <div class="video-wrapper bg-dark">
                 <iframe id="video-player" width="100%" height="100%" frameborder="0" style="display:block" allowfullscreen
-                    src="{{ $episode->content[0] }}"></iframe>
+                    data-src="{{ $episode->content[0] }}" loading="lazy"></iframe>
             </div>
         </div>
-
         <div class="server-switcher mt-3">
             <div class="alert alert-info d-flex align-items-center" role="alert">
                 <i class="bi bi-info-circle-fill me-2"></i>
@@ -34,7 +33,6 @@
             </div>
         </div>
     </div>
-
     <div class="container py-4">
         <div class="row">
             <div class="col-lg-8">
@@ -46,7 +44,6 @@
                         <li class="breadcrumb-item active">Episode {{ $episode->ep_number }}</li>
                     </ol>
                 </nav>
-
                 <div class="episode-info-card p-4 rounded-3">
                     <h1 class="h3 mb-3 text-capitalize">{{ $anime->title }} {{ $episode->ep_title }}</h1>
                     <div class="d-flex gap-3 mb-4">
@@ -58,7 +55,6 @@
                     </p>
                 </div>
             </div>
-
             <div class="col-lg-4">
                 <div class="episodes-sidebar">
                     <h4 class="mb-3">Episodes</h4>
@@ -72,7 +68,6 @@
             </div>
         </div>
     </div>
-
     <div class="bg-dark p-4 rounded mt-4">
         @include('layouts.partials.disqus-comment')
     </div>
