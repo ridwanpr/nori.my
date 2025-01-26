@@ -92,7 +92,8 @@ class AnimeListController extends Controller
             ->where('ep_slug', $episodeSlug)
             ->firstOrFail();
 
-        $groupedEpisodes = $anime->episode->groupBy('quality');
+        $filteredEpisodes = $anime->episode->where('ep_number', $epNumber);
+        $groupedEpisodes = $filteredEpisodes->groupBy('quality');
 
         return view('frontend.anime_watch', compact('episode', 'anime', 'groupedEpisodes'));
     }
