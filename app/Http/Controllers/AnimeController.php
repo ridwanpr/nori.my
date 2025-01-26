@@ -7,6 +7,7 @@ use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class AnimeController extends Controller
 {
@@ -27,7 +28,7 @@ class AnimeController extends Controller
         $request->validate([
             'title' => 'required|unique:anime|max:150',
             'slug' => 'required|unique:anime|max:50',
-            'image' => 'nullable|image',
+            'image' => 'nullable',
             'status' => 'required',
             'studio' => 'nullable|max:50',
             'year' => 'nullable|max:10',
@@ -70,7 +71,7 @@ class AnimeController extends Controller
         $request->validate([
             'title' => 'required|max:150',
             'slug' => 'required|max:50|unique:anime,slug,' . $anime->id,
-            'image' => 'nullable|image',
+            'image' => 'nullable',
             'status' => 'required',
             'studio' => 'nullable|max:50',
             'year' => 'nullable|max:10',
@@ -90,6 +91,7 @@ class AnimeController extends Controller
         ]));
 
         if ($request->hasFile('image')) {
+            Storage::delete('public/' . $anime->image);
             $anime->image = $request->file('image')->store('images', 'public');
             $anime->save();
         }
@@ -102,6 +104,7 @@ class AnimeController extends Controller
     public function destroy($id): RedirectResponse
     {
         $anime = Anime::findOrFail($id);
+        Storage::delete('public/' . $anime->image);
         $anime->delete();
         return redirect()->route('anime-list.index')->with('success', 'Anime deleted successfully.');
     }

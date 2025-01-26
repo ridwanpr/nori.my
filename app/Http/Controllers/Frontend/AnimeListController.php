@@ -18,7 +18,7 @@ class AnimeListController extends Controller
     public function index(Request $request): View
     {
         $cacheKey = 'anime_list_' . $request->fullUrl();
-        $animes = Cache::remember($cacheKey, now()->addDay(), function () use ($request) {
+        $animes = Cache::remember($cacheKey, now()->addHour(), function () use ($request) {
             $query = Anime::with('genres');
 
             if ($request->has('search') && $request->input('search')) {
@@ -54,7 +54,7 @@ class AnimeListController extends Controller
             return $query->paginate(10);
         });
 
-        $genres = Cache::remember('genres', now()->addDay(), function () {
+        $genres = Cache::remember('genres', now()->addHour(), function () {
             return Genre::orderBy('name')->get();
         });
 
@@ -63,7 +63,7 @@ class AnimeListController extends Controller
 
     public function show($slug): View
     {
-        $anime = Cache::remember('anime_' . $slug, now()->addDay(), function () use ($slug) {
+        $anime = Cache::remember('anime_' . $slug, now()->addHour(), function () use ($slug) {
             return Anime::with('genres', 'episode')
                 ->where('slug', $slug)
                 ->firstOrFail();
@@ -74,7 +74,7 @@ class AnimeListController extends Controller
 
         IncrementViewCount::dispatch($anime->id)->delay(now()->addSeconds(5));
 
-        $isBookmarked = Cache::remember('bookmark_' . auth()->id() . '_anime_' . $anime->id, now()->addDay(), function () use ($anime) {
+        $isBookmarked = Cache::remember('bookmark_' . auth()->id() . '_anime_' . $anime->id, now()->addHour(), function () use ($anime) {
             return Bookmark::where('user_id', auth()->id())
                 ->where('anime_id', $anime->id)
                 ->exists();
