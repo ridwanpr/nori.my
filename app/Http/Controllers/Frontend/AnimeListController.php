@@ -105,8 +105,7 @@ class AnimeListController extends Controller
 
         $allEps = Cache::remember('episode_' . $anime->id . '_all', now()->addHour(), function () use ($anime) {
             return Episode::where('anime_id', $anime->id)
-                ->orderBy('ep_number', 'asc')
-                ->distinct('ep_number')
+                ->groupBy('ep_number')
                 ->get();
         });
 
