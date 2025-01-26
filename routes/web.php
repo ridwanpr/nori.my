@@ -68,7 +68,7 @@ Route::get('/sitemap.xml', function () {
 
             $episodes = $anime->episode;
             foreach ($episodes as $episode) {
-                $sitemap->add(Url::create("anime/{$anime->slug}/{$episode->ep_slug}")
+                $sitemap->add(Url::create("anime/{$anime->slug}/{$episode->ep_slug}/{$episode->ep_number}")
                     ->setPriority(0.6)
                     ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY));
             }
