@@ -13,7 +13,7 @@
                             <div class="position-relative" style="width: 135px; height: 200px;">
                                 <img src="{{ asset('storage/' . $trending->anime->image) }}"
                                     class="img-fluid object-cover w-100 h-100" style="object-fit: cover;" width="135"
-                                    height="200" loading="lazy" alt="{{ $trending->anime->title }}">
+                                    height="200" fetchpriority="high" alt="{{ $trending->anime->title }}">
                                 <div class="position-absolute top-0 end-0 m-2">
                                     <span class="badge bg-danger text-white p-2">
                                         <i class="bi bi-fire"></i>
