@@ -8,7 +8,7 @@
             <div class="row g-3 overflow-auto pb-3"
                 style="display: grid; grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); gap: 0.75rem;">
                 @foreach ($trendingAnime as $trending)
-                    <div class="col-auto" style="width: 135px; height: 250px; overflow: hidden;">
+                    <div class="col-auto" style="width: 135px; height: 250px; overflow: hidden; margin-bottom: 1rem;">
                         <a href="{{ route('anime.show', $trending->anime->slug) }}" class="anime-card-link">
                             <div class="position-relative" style="width: 135px; height: 200px;">
                                 <img src="{{ asset('storage/' . $trending->anime->image) }}"
