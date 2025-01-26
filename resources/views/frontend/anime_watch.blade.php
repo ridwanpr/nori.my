@@ -53,11 +53,14 @@
                     <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="content-{{ $quality }}"
                         role="tabpanel" aria-labelledby="tab-{{ $quality }}">
                         <div class="d-flex flex-wrap gap-2 mt-3">
-                            @foreach ($episodes as $server)
-                                @foreach (json_decode($server->content) as $index => $dt)
+                            @foreach ($episodes as $episode)
+                                @php
+                                    $servers = json_decode($episode->content);
+                                @endphp
+                                @foreach ($servers as $index => $url)
                                     <button
-                                        class="btn {{ $index == 0 ? 'btn-primary' : 'btn-secondary' }} switch-server-btn"
-                                        data-url="{{ $dt }}">
+                                        class="btn {{ $index === 0 ? 'btn-primary' : 'btn-secondary' }} switch-server-btn"
+                                        data-url="{{ $url }}">
                                         Server {{ $index + 1 }}
                                     </button>
                                 @endforeach

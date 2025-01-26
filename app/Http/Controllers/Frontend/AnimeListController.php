@@ -85,15 +85,16 @@ class AnimeListController extends Controller
 
     public function watchEpisode($slug, $episodeSlug, $epNumber)
     {
-        $anime = Anime::with('episode')->where('slug', $slug)->firstOrFail();
+        $anime = Anime::with(['episode' => function ($query) use ($epNumber) {
+            $query->where('ep_number', $epNumber);
+        }])->where('slug', $slug)->firstOrFail();
 
         $episode = Episode::where('anime_id', $anime->id)
             ->where('ep_number', $epNumber)
             ->where('ep_slug', $episodeSlug)
             ->firstOrFail();
 
-        $filteredEpisodes = $anime->episode->where('ep_number', $epNumber);
-        $groupedEpisodes = $filteredEpisodes->groupBy('quality');
+        $groupedEpisodes = $anime->episode->groupBy('quality');
         $allEps = Episode::where('anime_id', $anime->id)->get();
 
         return view('frontend.anime_watch', compact('episode', 'anime', 'groupedEpisodes', 'allEps'));
