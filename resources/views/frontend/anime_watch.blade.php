@@ -92,7 +92,7 @@
                 <div class="episodes-sidebar">
                     <h4 class="mb-3">Episodes</h4>
                     <div class="episode-list">
-                        @foreach ($episodes as $ep)
+                        @foreach ($allEps as $ep)
                             <a href="{{ route('watch-episode', [$anime->slug, $ep->ep_slug, $ep->ep_number]) }}"
                                 class="episode-card">{{ $ep->ep_number }}</a>
                         @endforeach
