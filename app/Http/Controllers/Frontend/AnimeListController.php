@@ -85,17 +85,27 @@ class AnimeListController extends Controller
 
     public function watchEpisode($slug, $episodeSlug, $epNumber)
     {
-        $anime = Anime::with(['episode' => function ($query) use ($epNumber) {
-            $query->where('ep_number', $epNumber);
-        }])->where('slug', $slug)->firstOrFail();
+        $cacheKey = 'anime_' . $slug . '_episode_' . $epNumber;
+        $anime = Cache::remember($cacheKey, now()->addHour(), function () use ($slug, $epNumber) {
+            return Anime::with(['episode' => function ($query) use ($epNumber) {
+                $query->where('ep_number', $epNumber);
+            }])->where('slug', $slug)->firstOrFail();
+        });
 
-        $episode = Episode::where('anime_id', $anime->id)
-            ->where('ep_number', $epNumber)
-            ->where('ep_slug', $episodeSlug)
-            ->firstOrFail();
+        $episode = Cache::remember('episode_' . $anime->id . '_' . $epNumber . '_' . $episodeSlug, now()->addHour(), function () use ($anime, $epNumber, $episodeSlug) {
+            return Episode::where('anime_id', $anime->id)
+                ->where('ep_number', $epNumber)
+                ->where('ep_slug', $episodeSlug)
+                ->firstOrFail();
+        });
 
-        $groupedEpisodes = $anime->episode->groupBy('quality');
-        $allEps = Episode::where('anime_id', $anime->id)->get();
+        $groupedEpisodes = Cache::remember('episode_' . $anime->id . '_grouped', now()->addHour(), function () use ($anime) {
+            return $anime->episode->groupBy('quality');
+        });
+
+        $allEps = Cache::remember('episode_' . $anime->id . '_all', now()->addHour(), function () use ($anime) {
+            return Episode::where('anime_id', $anime->id)->get();
+        });
 
         return view('frontend.anime_watch', compact('episode', 'anime', 'groupedEpisodes', 'allEps'));
     }
