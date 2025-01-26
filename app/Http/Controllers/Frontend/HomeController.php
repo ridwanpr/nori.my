@@ -13,10 +13,10 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $latestReleases = Cache::remember('latest_releases', now()->addDay(), function () {
+        $latestReleases = Cache::remember('latest_releases', now()->addHour(), function () {
             return Anime::with('genres')->orderBy('updated_at', 'desc')->latest()->take(18)->get();
         });
-        $trendingAnime = Cache::remember('trending_anime', now()->addDay(), function () {
+        $trendingAnime = Cache::remember('trending_anime', now()->addHour(), function () {
             return TrendingAnime::with('anime')->orderBy('weekly_views', 'desc')->take(8)->get();
         });
 
