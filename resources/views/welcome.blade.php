@@ -6,11 +6,11 @@
                 <h2 class="h5 fw-bold text-light">Trending Now</h2>
             </div>
             <div class="row g-3 overflow-auto pb-3"
-                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); gap: 0.75rem;">
+                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.5rem;">
                 @foreach ($trendingAnime as $trending)
-                    <div class="col-auto" style="width: 135px; height: 250px; overflow: hidden; margin-bottom: 1rem;">
+                    <div class="col-auto">
                         <a href="{{ route('anime.show', $trending->anime->slug) }}" class="anime-card-link">
-                            <div class="position-relative" style="width: 135px; height: 200px;">
+                            <div class="position-relative">
                                 <img src="{{ asset('storage/' . $trending->anime->image) }}"
                                     class="img-fluid object-cover w-100 h-100" style="object-fit: cover;" width="135"
                                     height="200" fetchpriority="high" alt="{{ $trending->anime->title }}">
@@ -42,13 +42,13 @@
         <div class="container-fluid px-3">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2 class="h5 fw-bold text-light">Latest Update</h2>
-                <a href="{{ route('anime.index') }}" class="text-decoration-none text-light">Browse All</a>
+                <a href="{{ route('anime.index') }}" class="text-decoration-none text-light me-2">Browse All</a>
             </div>
             <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
                 @foreach ($latestReleases as $anime)
                     <div class="col-6 col-md-4">
                         <a href="{{ route('anime.show', $anime->slug) }}" class="anime-card-link">
-                            <div class="anime-card position-relative">
+                            <div class="anime-card position-relative mb-2">
                                 <div class="anime-card-image position-relative">
                                     <img src="{{ asset('storage/' . $anime->image) }}" class="img-fluid object-cover w-100"
                                         style="aspect-ratio: 2/3;" alt="{{ $anime->title }}">
