@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <div class="container py-4">
+    <div class="py-4">
         <div class="row">
             <div class="col-lg-8">
                 <nav aria-label="breadcrumb">
@@ -80,10 +80,10 @@
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                         <li class="breadcrumb-item"><a
                                 href="{{ route('anime.show', $anime->slug) }}">{{ $anime->title }}</a></li>
-                        <li class="breadcrumb-item active">Episode {{ $episode->ep_number }}</li>
+                        <li class="breadcrumb-item active">Episode {{ last(request()->segments()) }}</li>
                     </ol>
                 </nav>
-                <div class="episode-info-card p-4 rounded-3">
+                <div class="episode-info-card rounded-3">
                     <h1 class="h3 mb-3 text-capitalize">{{ $anime->title }} <br> {{ $episode->ep_title }}</h1>
                     <div class="d-flex gap-3 mb-4">
                         <span class="text-body-secondary">{{ $anime->duration }}m</span>
