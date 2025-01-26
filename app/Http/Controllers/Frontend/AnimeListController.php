@@ -85,11 +85,18 @@ class AnimeListController extends Controller
 
     public function watchEpisode($slug, $episodeSlug): View
     {
-        $anime = Anime::with('episode')->where('slug', $slug)->firstOrFail();
-        $episode = Episode::where('ep_slug', $episodeSlug)->firstOrFail();
+        $anime = Cache::remember('anime_' . $slug, now()->addHour(), function () use ($slug) {
+            return Anime::with('episode')->where('slug', $slug)->firstOrFail();
+        });
+
+        $episode = Cache::remember('episode_' . $episodeSlug, now()->addHour(), function () use ($episodeSlug) {
+            return Episode::where('ep_slug', $episodeSlug)->firstOrFail();
+        });
 
         $episode->content = json_decode($episode->content, true);
-        $episodes = $anime->episode;
+        $episodes = Cache::remember('episodes_' . $anime->id, now()->addHour(), function () use ($anime) {
+            return $anime->episode;
+        });
 
         return view('frontend.anime_watch', compact('episode', 'anime', 'episodes'));
     }
