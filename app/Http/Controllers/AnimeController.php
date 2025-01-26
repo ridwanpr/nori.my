@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anime;
 use App\Models\Genre;
+use Cache;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -55,6 +56,8 @@ class AnimeController extends Controller
 
         $anime->genres()->sync($request->input('genres'));
 
+        Cache::flush();
+
         return redirect()->route('anime-list.index')->with('success', 'Anime created successfully.');
     }
 
@@ -98,6 +101,8 @@ class AnimeController extends Controller
 
         $anime->genres()->sync($request->input('genres'));
 
+        Cache::flush();
+
         return redirect()->route('anime-list.index')->with('success', 'Anime updated successfully.');
     }
 
@@ -106,6 +111,9 @@ class AnimeController extends Controller
         $anime = Anime::findOrFail($id);
         Storage::delete('public/' . $anime->image);
         $anime->delete();
+
+        Cache::flush();
+        
         return redirect()->route('anime-list.index')->with('success', 'Anime deleted successfully.');
     }
 }

@@ -67,15 +67,14 @@
                 </form>
             </div>
             <div class="col-lg-9">
-                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+                <div class="row g-4">
                     @foreach ($animes as $anime)
-                        <div class="col-6 col-md-4">
+                        <div class="col-6 col-md-4 col-lg-3">
                             <a href="{{ route('anime.show', $anime->slug) }}" class="anime-card-link">
                                 <div class="anime-card position-relative">
                                     <div class="anime-card-image position-relative">
                                         <img src="{{ asset('storage/' . $anime->image) }}"
-                                            class="img-fluid object-cover w-100" style="aspect-ratio: 2/3;"
-                                            alt="{{ $anime->title }}">
+                                            class="img-fluid object-cover w-100" alt="{{ $anime->title }}">
                                         <div style="right: 5px; top: 4px" class="position-absolute top-0 end-0">
                                             <span class="badge bg-warning text-dark">{{ $anime->rating ?? '' }}</span>
                                         </div>
@@ -98,5 +97,6 @@
                 {{ $animes->links() }}
             </div>
         </div>
+
     </section>
 @endsection

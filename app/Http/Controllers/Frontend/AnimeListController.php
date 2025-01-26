@@ -51,7 +51,7 @@ class AnimeListController extends Controller
                 }
             }
 
-            return $query->paginate(10);
+            return $query->paginate(12);
         });
 
         $genres = Cache::remember('genres', now()->addHour(), function () {

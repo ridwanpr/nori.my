@@ -7,6 +7,7 @@ use App\Models\Episode;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Cache;
 
 class AnimeEpisodeController extends Controller
 {
@@ -43,6 +44,7 @@ class AnimeEpisodeController extends Controller
         $episode->save();
 
         Anime::where('id', $id)->update(['created_at' => now()]);
+        Cache::flush();
 
         return redirect()->route('episode-list.index', $id)
             ->with('success', 'Episode added successfully');
@@ -71,6 +73,8 @@ class AnimeEpisodeController extends Controller
         $episode->content = json_encode($validatedData['content_urls']);
         $episode->quality = $request->input('quality');
         $episode->save();
+
+        Cache::flush();
 
         return redirect()->route('episode-list.index', $episode->anime_id)
             ->with('success', 'Episode updated successfully');

@@ -7,6 +7,7 @@ use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Cache;
 
 class GenreController extends Controller
 {
@@ -28,6 +29,8 @@ class GenreController extends Controller
             'name' => $request->input('name'),
             'slug' => $slug,
         ]);
+        
+        Cache::flush();
 
         return redirect()->route('genre.index')->with('success', 'Genre created successfully.');
     }
@@ -50,12 +53,15 @@ class GenreController extends Controller
             'slug' => $slug,
         ]);
 
+        Cache::flush();
+
         return redirect()->route('genre.index')->with('success', 'Genre updated successfully.');
     }
 
     public function destroy(Genre $genre): RedirectResponse
     {
         $genre->delete();
+        Cache::flush();
 
         return redirect()->route('genre.index')->with('success', 'Genre deleted successfully.');
     }
