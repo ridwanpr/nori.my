@@ -94,7 +94,6 @@ class AnimeListController extends Controller
 
         $filteredEpisodes = $anime->episode->where('ep_number', $epNumber);
         $groupedEpisodes = $filteredEpisodes->groupBy('quality');
-
         $allEps = Episode::where('anime_id', $anime->id)->get();
 
         return view('frontend.anime_watch', compact('episode', 'anime', 'groupedEpisodes', 'allEps'));
