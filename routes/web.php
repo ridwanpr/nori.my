@@ -17,7 +17,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('anime', [AnimeListController::class, 'index'])->name('anime.index');
 Route::get('anime/{slug}', [AnimeListController::class, 'show'])->name('anime.show');
-Route::get('anime/{slug}/{episodeSlug}', [AnimeListController::class, 'watchEpisode'])->name('watch-episode');
+Route::get('anime/{slug}/{episodeSlug}/{epNumber}', [AnimeListController::class, 'watchEpisode'])->name('watch-episode');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'getLoginPage'])->name('login');

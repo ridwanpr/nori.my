@@ -26,32 +26,46 @@
         <div class="container-fluid px-0">
             <div class="video-wrapper">
                 <iframe id="video-player" class="bg-dark" width="100%" height="100%" frameborder="0" style="display:block"
-                    allowfullscreen data-src="{{ $episode->content[0] }}" loading="lazy"></iframe>
+                    allowfullscreen data-src="{{ json_decode($episode->content)[0] }}" loading="lazy"></iframe>
+            </div>
+        </div>
+        <div class="alert alert-info d-flex align-items-center mt-4" role="alert">
+            <i class="bi bi-info-circle-fill me-2"></i>
+            <div class="text-white">
+                Jika video tidak dapat diputar, silakan pilih server lainnya.
             </div>
         </div>
         <div class="server-switcher mt-3">
-            <div class="alert alert-info d-flex align-items-center" role="alert">
-                <i class="bi bi-info-circle-fill me-2"></i>
-                <div class="text-white">
-                    Jika video tidak dapat diputar, silakan pilih server lainnya.
-                </div>
-            </div>
-            <div class="alert alert-warning d-flex align-items-center" role="alert">
-                <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                <div class="text-white">
-                    Video mungkin memiliki iklan yang berasal dari hoster video dan <strong>bukan</strong> dari Nori, so be careful.
-                </div>
-            </div>
-            <div class="d-flex flex-wrap gap-2">
-                @foreach ($episode->content as $index => $url)
-                    <button class="btn {{ $index == 0 ? 'btn-primary' : 'btn-secondary' }} switch-server-btn"
-                        data-url="{{ $url }}">
-                        Server {{ $index + 1 }}
-                    </button>
+            <ul class="nav nav-tabs" id="qualityTabs" role="tablist">
+                @foreach ($groupedEpisodes as $quality => $episodes)
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link {{ $loop->first ? 'active' : '' }}" id="tab-{{ $quality }}"
+                            data-bs-toggle="tab" data-bs-target="#content-{{ $quality }}" type="button" role="tab"
+                            aria-controls="content-{{ $quality }}"
+                            aria-selected="{{ $loop->first ? 'true' : 'false' }}">
+                            {{ $quality }}
+                        </button>
+                    </li>
+                @endforeach
+            </ul>
+            <div class="tab-content" id="qualityTabsContent">
+                @foreach ($groupedEpisodes as $quality => $episodes)
+                    <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="content-{{ $quality }}"
+                        role="tabpanel" aria-labelledby="tab-{{ $quality }}">
+                        <div class="d-flex flex-wrap gap-2 mt-3">
+                            @foreach ($episodes as $index => $episode)
+                                <button class="btn {{ $index == 0 ? 'btn-primary' : 'btn-secondary' }} switch-server-btn"
+                                    data-url="{{ json_decode($episode->content)[0] }}">
+                                    Server {{ $index + 1 }}
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
                 @endforeach
             </div>
         </div>
     </div>
+
     <div class="container py-4">
         <div class="row">
             <div class="col-lg-8">
@@ -79,7 +93,7 @@
                     <h4 class="mb-3">Episodes</h4>
                     <div class="episode-list">
                         @foreach ($episodes as $ep)
-                            <a href="{{ route('watch-episode', [$anime->slug, $ep->ep_slug]) }}"
+                            <a href="{{ route('watch-episode', [$anime->slug, $ep->ep_slug, $ep->ep_number]) }}"
                                 class="episode-card">{{ $ep->ep_number }}</a>
                         @endforeach
                     </div>

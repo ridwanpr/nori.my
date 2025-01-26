@@ -23,7 +23,7 @@
 
             <div class="d-flex gap-3 flex-wrap">
                 @if ($anime->episode->count() > 0)
-                    <a href="{{ route('watch-episode', [$anime->slug, $anime->episode[0]->ep_slug]) }}"
+                    <a href="{{ route('watch-episode', [$anime->slug, $anime->episode[0]->ep_slug, $anime->episode[0]->ep_number]) }}"
                         class="btn btn-primary btn-lg btn-sm-md">
                         <i class="bi bi-play-fill me-2"></i>Watch Episode 1
                     </a>
@@ -72,7 +72,7 @@
             <div class="row g-3">
                 @foreach ($anime->episode as $episode)
                     <div class="col-6 col-sm-4 col-md-3">
-                        <a href="{{ route('watch-episode', [$anime->slug, $episode->ep_slug]) }}"
+                        <a href="{{ route('watch-episode', [$anime->slug, $episode->ep_slug, $episode->ep_number]) }}"
                             class="btn btn-outline-secondary text-white btn-sm w-100 py-3">
                             Episode {{ $episode->ep_number }}
                         </a>

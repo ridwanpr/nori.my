@@ -83,21 +83,17 @@ class AnimeListController extends Controller
         return view('frontend.anime_detail', compact('anime', 'isBookmarked'));
     }
 
-    public function watchEpisode($slug, $episodeSlug): View
+    public function watchEpisode($slug, $episodeSlug, $epNumber)
     {
-        $anime = Cache::remember('anime_' . $slug, now()->addHour(), function () use ($slug) {
-            return Anime::with('episode')->where('slug', $slug)->firstOrFail();
-        });
+        $anime = Anime::with('episode')->where('slug', $slug)->firstOrFail();
 
-        $episode = Cache::remember('episode_' . $episodeSlug, now()->addHour(), function () use ($episodeSlug) {
-            return Episode::where('ep_slug', $episodeSlug)->firstOrFail();
-        });
+        $episode = Episode::where('anime_id', $anime->id)
+            ->where('ep_number', $epNumber)
+            ->where('ep_slug', $episodeSlug)
+            ->firstOrFail();
 
-        $episode->content = json_decode($episode->content, true);
-        $episodes = Cache::remember('episodes_' . $anime->id, now()->addHour(), function () use ($anime) {
-            return $anime->episode;
-        });
+        $groupedEpisodes = $anime->episode->groupBy('quality');
 
-        return view('frontend.anime_watch', compact('episode', 'anime', 'episodes'));
+        return view('frontend.anime_watch', compact('episode', 'anime', 'groupedEpisodes'));
     }
 }
