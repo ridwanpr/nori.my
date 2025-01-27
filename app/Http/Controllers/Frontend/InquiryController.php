@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 use App\Models\Inquiry;
 
 class InquiryController extends Controller
@@ -19,6 +20,7 @@ class InquiryController extends Controller
         $request->validate([
             'title' => 'required',
             'content' => 'required',
+            'cf-turnstile-response' => app()->environment('production') ? ['required', Rule::turnstile()] : [],
         ]);
 
         Inquiry::create([

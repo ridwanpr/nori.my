@@ -23,6 +23,9 @@
                     <label for="content" class="form-label">Content</label>
                     <textarea class="form-control" id="content" name="content" required></textarea>
                 </div>
+                <div class="mb-3">
+                    <x-turnstile />
+                </div>
                 <button type="submit" class="btn btn-primary">Send</button>
             </form>
         </div>
