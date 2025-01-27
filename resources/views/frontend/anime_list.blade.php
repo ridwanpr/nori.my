@@ -94,7 +94,9 @@
                         </div>
                     @endforeach
                 </div>
-                {{ $animes->links() }}
+                <div class="mt-4">
+                    {{ $animes->links() }}
+                </div>
             </div>
         </div>
 
