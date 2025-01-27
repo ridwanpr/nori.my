@@ -21,6 +21,7 @@
                                     <th>Episode Number</th>
                                     <th>Episode Title</th>
                                     <th>Episode Slug</th>
+                                    <th>Quality</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -30,6 +31,7 @@
                                         <td>{{ $episode->ep_number }}</td>
                                         <td>{{ $episode->ep_title }}</td>
                                         <td>{{ $episode->ep_slug }}</td>
+                                        <td>{{ $episode->quality }}</td>
                                         <td>
                                             <a href="{{ route('episode-list.edit', $episode->id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i> Edit</a>
                                             <form action="" method="POST" style="display:inline;">

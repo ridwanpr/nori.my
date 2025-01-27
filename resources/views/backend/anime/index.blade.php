@@ -17,6 +17,7 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
+                                    <td>#</td>
                                     <th>Title</th>
                                     <th>Genres</th>
                                     <th>Year</th>
@@ -26,8 +27,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($animes as $anime)
+                                @foreach ($animes as $index => $anime)
                                     <tr>
+                                        <td>{{ ($animes->currentPage() - 1) * $animes->perPage() + $index + 1 }}</td>
                                         <td>{{ $anime->title }}</td>
                                         <td>
                                             @foreach ($anime->genres as $genre)
