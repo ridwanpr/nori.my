@@ -90,7 +90,7 @@ class AnimeListController extends Controller
 
     public function watchEpisode($slug, $episodeSlug, $epNumber)
     {
-        $anime =  Anime::with(['episode' => function ($query) use ($epNumber) {
+        $anime = Anime::with(['episode' => function ($query) use ($epNumber) {
             $query->where('ep_number', $epNumber);
         }])->where('slug', $slug)->firstOrFail();
 
@@ -104,7 +104,14 @@ class AnimeListController extends Controller
 
         $groupedEpisodesCacheKey = 'anime_' . $anime->id . '_grouped_episodes';
         $groupedEpisodes = Cache::remember($groupedEpisodesCacheKey, now()->addHour(), function () use ($anime) {
-            return $anime->episode->groupBy('quality');
+            $qualityOrder = ['360p', '480p', '720p', '1080p'];
+            $grouped = $anime->episode->groupBy('quality');
+
+            return $grouped->sortBy(function ($items, $quality) use ($qualityOrder) {
+                return array_search($quality, $qualityOrder) !== false
+                    ? array_search($quality, $qualityOrder)
+                    : PHP_INT_MAX;
+            }, SORT_NUMERIC);
         });
 
         $allEpsCacheKey = 'anime_' . $anime->id . '_all_episodes';
