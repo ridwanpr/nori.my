@@ -9,6 +9,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Frontend\AnimeListController;
 use App\Http\Controllers\Frontend\BookmarkController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\InquiryController;
+use App\Http\Controllers\InquiryListController;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
 use Illuminate\Support\Facades\Response;
@@ -18,6 +20,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('anime', [AnimeListController::class, 'index'])->name('anime.index');
 Route::get('anime/{slug}', [AnimeListController::class, 'show'])->name('anime.show');
 Route::get('anime/{slug}/{episodeSlug}/{epNumber}', [AnimeListController::class, 'watchEpisode'])->name('watch-episode');
+Route::get('inquiry', [InquiryController::class, 'index'])->name('inquiry.index');
+Route::post('inquiry', [InquiryController::class, 'store'])->name('inquiry.store');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'getLoginPage'])->name('login');
@@ -38,6 +42,7 @@ Route::group(['middleware' => ['auth', 'checkRoles:admin']], function () {
 
     Route::resource('genre', GenreController::class);
     Route::resource('anime-list', AnimeController::class);
+    Route::resource('inquiry-list', InquiryListController::class);
 });
 
 Route::get('bookmark', [BookmarkController::class, 'index'])->name('bookmark.index');

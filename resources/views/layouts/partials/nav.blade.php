@@ -17,6 +17,11 @@
                         <i class="bi bi-collection-play me-2"></i>Browse Anime
                     </a>
                 </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="{{ route('inquiry.index') }}">
+                        <i class="bi bi-question-circle me-2"></i>Request Anime / Broken Link?
+                    </a>
+                </li>
                 @guest
                     <li class="nav-item px-2">
                         <a class="nav-link" href="{{ route('bookmark.index') }}">Bookmark</a>
