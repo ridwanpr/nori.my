@@ -94,35 +94,19 @@ class AnimeListController extends Controller
             $query->where('ep_number', $epNumber);
         }])->where('slug', $slug)->firstOrFail();
 
-        $episodeCacheKey = 'episode_' . $anime->id . '_' . $epNumber . '_' . $episodeSlug;
-        $episode = Cache::remember($episodeCacheKey, now()->addHour(), function () use ($anime, $epNumber, $episodeSlug) {
-            return Episode::where('anime_id', $anime->id)
-                ->where('ep_number', $epNumber)
-                ->where('ep_slug', $episodeSlug)
-                ->firstOrFail();
-        });
+        $episode = Episode::where('anime_id', $anime->id)
+            ->where('ep_number', $epNumber)
+            ->where('ep_slug', $episodeSlug)
+            ->firstOrFail();
 
-        $groupedEpisodesCacheKey = 'anime_' . $anime->id . '_grouped_episodes';
-        $groupedEpisodes = Cache::remember($groupedEpisodesCacheKey, now()->addHour(), function () use ($anime) {
-            $qualityOrder = ['360p', '480p', '720p', '1080p'];
-            $grouped = $anime->episode->groupBy('quality');
+        $groupedEpisodes = $anime->episode->groupBy('quality');
 
-            return $grouped->sortBy(function ($items, $quality) use ($qualityOrder) {
-                return array_search($quality, $qualityOrder) !== false
-                    ? array_search($quality, $qualityOrder)
-                    : PHP_INT_MAX;
-            }, SORT_NUMERIC);
-        });
-
-        $allEpsCacheKey = 'anime_' . $anime->id . '_all_episodes';
-        $allEps = Cache::remember($allEpsCacheKey, now()->addHour(), function () use ($anime) {
-            return Episode::where('anime_id', $anime->id)
-                ->select('id', 'ep_number', 'ep_slug')
-                ->orderByRaw('CAST(ep_number AS UNSIGNED)')
-                ->get()
-                ->unique('ep_number')
-                ->values();
-        });
+        $allEps = Episode::where('anime_id', $anime->id)
+            ->select('id', 'ep_number', 'ep_slug')
+            ->orderByRaw('CAST(ep_number AS UNSIGNED)')
+            ->get()
+            ->unique('ep_number')
+            ->values();
 
         return view('frontend.anime_watch', compact('episode', 'anime', 'groupedEpisodes', 'allEps'));
     }
