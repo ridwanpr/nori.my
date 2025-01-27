@@ -10,9 +10,6 @@
                     <h5 class="card-title">Inquiry List</h5>
                 </div>
                 <div class="card-body">
-                    <div class="mb-3">
-                        <a href="" class="btn btn-primary">Add Anime</a>
-                    </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead>
