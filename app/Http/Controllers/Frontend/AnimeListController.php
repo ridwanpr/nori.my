@@ -49,6 +49,8 @@ class AnimeListController extends Controller
                         $query->orderBy('created_at', 'desc');
                         break;
                 }
+            } else {
+                $query->orderBy('created_at', 'desc');
             }
 
             return $query->paginate(12);
