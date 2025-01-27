@@ -72,7 +72,6 @@ class AnimeListController extends Controller
                 ->firstOrFail();
         });
 
-
         $cacheKey = 'anime_' . $anime->id . '_view_count';
         Cache::increment($cacheKey);
 
@@ -110,7 +109,7 @@ class AnimeListController extends Controller
         $allEps = Cache::remember($allEpsCacheKey, now()->addHour(), function () use ($anime) {
             return Episode::where('anime_id', $anime->id)
                 ->select('id', 'ep_number', 'ep_slug')
-                ->orderBy('ep_number')
+                ->orderByRaw('CAST(ep_number AS UNSIGNED)')
                 ->get()
                 ->unique('ep_number')
                 ->values();
